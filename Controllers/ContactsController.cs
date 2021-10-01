@@ -58,6 +58,7 @@ namespace ZADALKHAIR.Controllers
         {
             if (ModelState.IsValid)
             {
+                /*contact.ContactPhoneNumber = $"({contact.ContactCounrty}){contact.ContactPhoneNumber}";*/
                 contact.CreatedAt = DateTime.Now;
                 contact.ContactSatuts = false;
                 _context.Add(contact);
