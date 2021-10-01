@@ -1,0 +1,57 @@
+html, body
+  margin: 0
+  padding: 0
+  
+body
+  width: 100vw
+  height: 100vh
+  display: flex
+  justify-content: center
+  flex-direction: row
+  background-color: #2C82C9
+  
+.hamburger
+  display: flex
+  align-self: center
+  flex-direction: column
+  justify-content: space-between
+  width: 100px
+  height: 60px
+  cursor: pointer
+  
+  div
+    align-self: flex-end
+    height: 4px
+    width: 100%
+    background: #3E4651
+    
+  .meat
+    width: 75%
+    transition: all 200ms ease-in-out
+    
+  .bottom-bun
+    width: 50%
+    transition: all 400ms ease-in-out
+  
+  &:hover
+    div
+      width: 100%
+    
+    .top-bun
+      animation: burger-hover 1s infinite ease-in-out alternate
+    
+    .meat
+      animation: burger-hover 1s infinite ease-in-out alternate forwards 200ms
+    
+    .bottom-bun
+      animation: burger-hover 1s infinite ease-in-out alternate forwards 400ms
+
+    
+//Animation Keyframes
+@keyframes burger-hover
+  0%
+    width: 100%
+  50%
+    width: 50%
+  100%
+    width: 100%

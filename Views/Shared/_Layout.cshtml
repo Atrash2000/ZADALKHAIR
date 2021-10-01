@@ -3,46 +3,94 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ZADALKHAIR</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" href="~/images/Logo.jpeg" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/hover.css/css/hover-min.css" />
+    <link rel="stylesheet" href="~/lib/flip-cards/hamburger/css/style.css" />
+    @* Google Font *@
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Antic+Slab&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/AboutUs.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
+<body onscroll="controllNavBar()">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ZADALKHAIR</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="sidebar-bg"></div>
+        <aside class="sidebar px-4 py-3">
+            <button type="button" onclick="closeSidebar()" class="close btn-close text-white position-fixed" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <nav>
+                <ul>
+                    <li class="mb-3">
+                        <a href="#" class="text-white">Home</a>
+                    </li>
+                    <li class="mb-3">
+                        <a asp-action="AboutUs" class="text-white">About Us</a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="#" class="text-white">Our Services</a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="#" class="text-white">Blog</a>
+                    </li>
+                    @*<li class="mb-3">
+                            <a href="#" class="text-white">Career</a>
+                        </li>*@
+                    <li class="mb-3">
+                        <a href="#" class="text-white">Contact Us</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <nav class="fixed-top bg-transparent">
+            <div class="container-fluid d-flex justify-content-between w-100" id="nav-container">
+                <img src="~/images/Logo.jpeg" class="logo-img-1" alt="logo" id="logo">
+
+                <ul class="d-flex">
+                    <li class="text-white pt-4">TOLL FREE: 800 – KNOX (5669)</li>
+                    <li class="pt-4 mx-4">
+                        <div onclick="showSideBar()" class="hamburger">
+                            <div class="top-bun"></div>
+                            <div class="meat"></div>
+                            <div class="bottom-bun"></div>
+                        </div>
+                    </li>
+                </ul>
             </div>
+
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - ZADALKHAIR - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+
+    <footer class="text-muted mt-5">
+        <div class="subscribe-area py-5 text-white" style="background-color: #282828;">
+            <h3 class="mb-4 text-center">Newsletter</h3>
+            <p class="text-center">Subscribe to our newsletter and get tuned with our latest updates</p>
+            <div class="d-flex justify-content-center">
+                <input type="text" class="subscribe-search py-2 position-relative pl-3" placeholder="Enter your mail" />
+                <button class="btn btn-subscribe rounded-0 px-3 text-white position-relative">SUBSCRIBE</button>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+@*<div class="container">
+        &copy; 2021 - Zad - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>*@

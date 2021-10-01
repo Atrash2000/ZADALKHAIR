@@ -1,0 +1,84 @@
+.hamburger {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-item-align: center;
+    align-self: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between; 
+    width: 35px;
+    height: 22px;
+    cursor: pointer;
+}
+
+    .hamburger div {
+        -ms-flex-item-align: end;
+        align-self: flex-end;
+        height: 3px;
+        width: 100%;
+        background: #fff;
+    }
+
+    .hamburger .meat {
+        width: 75%;
+        -webkit-transition: all 200ms ease-in-out;
+        transition: all 200ms ease-in-out;
+    }
+
+    .hamburger .bottom-bun {
+        width: 50%;
+        -webkit-transition: all 400ms ease-in-out;
+        transition: all 400ms ease-in-out;
+    }
+
+    .hamburger:hover div {
+        width: 100%;
+    }
+
+    .hamburger:hover .top-bun {
+        -webkit-animation: burger-hover 1s infinite ease-in-out alternate;
+        animation: burger-hover 1s infinite ease-in-out alternate;
+    }
+
+    .hamburger:hover .meat {
+        -webkit-animation: burger-hover 1s infinite ease-in-out alternate forwards 200ms;
+        animation: burger-hover 1s infinite ease-in-out alternate forwards 200ms;
+    }
+
+    .hamburger:hover .bottom-bun {
+        -webkit-animation: burger-hover 1s infinite ease-in-out alternate forwards 400ms;
+        animation: burger-hover 1s infinite ease-in-out alternate forwards 400ms;
+    }
+
+@-webkit-keyframes burger-hover {
+    0% {
+        width: 100%;
+    }
+
+    50% {
+        width: 50%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes burger-hover {
+    0% {
+        width: 100%;
+    }
+
+    50% {
+        width: 50%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
