@@ -1,0 +1,13 @@
+﻿.contact-info {
+    background-color: #efefef;
+
+}
+
+.icon {
+    font-size: 30px;
+    color: #333333;
+}
+
+textarea {
+    resize: horizontal
+}

@@ -33,6 +33,7 @@ a.navbar-brand {
 -------------------------------------------------- */
 html {
     font-size: 14px;
+    width: 100%
 }
 
 @media (min-width: 768px) {
@@ -82,9 +83,9 @@ html {
     min-height: 100%;
 }
 
-body {
+/*body {
     font-family: 'Antic Slab', serif;
-}
+}*/
 
 a {
     text-decoration: none !important;
