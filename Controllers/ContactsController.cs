@@ -46,7 +46,6 @@ namespace ZADALKHAIR.Controllers
         // GET: Contacts/Create
         public IActionResult Create()
         {
-           
             return View();
         }
 

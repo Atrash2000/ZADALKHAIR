@@ -13,31 +13,31 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ContactEmail)
+                <label asp-for="@Model??.ContactEmail" class="col-form-label"></label>                 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContactName)
+                <label asp-for="@Model??.ContactName" class="col-form-label"></label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContactPhoneNumber)
+                <label asp-for="@Model??.ContactPhoneNumber" class="col-form-label"></label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContactCounrty)
+                <label asp-for="@Model??.ContactCounrty" class="col-form-label"></label>            
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContactSubject)
+                 <label asp-for="@Model??.ContactSubject" class="col-form-label"></label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContactMassege)
+                <label asp-for="@Model??.ContactMassege" class="col-form-label"></label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContactSatuts)
+                <label asp-for="@Model??.ContactSatuts" class="col-form-label"></label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
+                <label asp-for="@Model??.CreatedAt" class="col-form-label"></label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SatutsUpdate)
+                <label asp-for="@Model??.SatutsUpdate" class="col-form-label"></label>
             </th>
             <th></th>
         </tr>
@@ -46,31 +46,40 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ContactEmail)
+                @item.ContactEmail
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ContactName)
+                @item.ContactName
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ContactPhoneNumber)
+                @item.ContactPhoneNumber
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ContactCounrty)
+                @item.ContactCounrty
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ContactSubject)
+                @item.ContactSubject
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ContactMassege)
+                @item.ContactMassege
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ContactSatuts)
+                @item.ContactSatuts
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
+                @item.CreatedAt
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SatutsUpdate)
+                @if (item.SatutsUpdate.ToString() == "1/01/0001 12:00:00 AM")
+                {
+                    <p>Not Set</p>
+                }
+                else
+                {
+                    @item.SatutsUpdate             
+                }
+
+
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ContactID">Edit</a> |
