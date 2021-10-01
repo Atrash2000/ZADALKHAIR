@@ -46,6 +46,7 @@ namespace ZADALKHAIR.Controllers
         // GET: Contacts/Create
         public IActionResult Create()
         {
+           
             return View();
         }
 
@@ -54,10 +55,12 @@ namespace ZADALKHAIR.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ContactID,ContactEmail,ContactName,ContactPhoneNumber,ContactCounrty,ContactSubject,ContactMassege,ContactSatuts,CreatedAt,SatutsUpdate")] Contact contact)
+        public async Task<IActionResult> Create([Bind("ContactID,ContactEmail,ContactName,ContactPhoneNumber,ContactCounrty,ContactSubject,ContactMassege")] Contact contact)
         {
             if (ModelState.IsValid)
             {
+                contact.CreatedAt = DateTime.Now;
+                contact.ContactSatuts = false;
                 _context.Add(contact);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
