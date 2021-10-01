@@ -1,0 +1,83 @@
+﻿@model IEnumerable<ZADALKHAIR.Models.Contact>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactCounrty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactSubject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactMassege)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactSatuts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SatutsUpdate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactPhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactCounrty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactSubject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactMassege)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactSatuts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SatutsUpdate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ContactID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ContactID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ContactID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
