@@ -15,5 +15,7 @@ namespace ZADALKHAIR.Data
         }
 
         public DbSet<ZADALKHAIR.Models.Contact> Contact { get; set; }
+
+        public DbSet<ZADALKHAIR.Models.FeedBack> FeedBack { get; set; }
     }
 }
