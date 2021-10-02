@@ -43,8 +43,8 @@ namespace ZADALKHAIR.Models
         [Display(Name = "Rating")]
         public double Rate { get; set; }
 
-        [Display(Name = "Image")]
-        public string Image { get; set; }
+        [Display(Name = "Sex")]
+        public string Sex { get; set; }
 
     }
 }

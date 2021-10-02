@@ -91,9 +91,6 @@ namespace ZADALKHAIR.Migrations
                     b.Property<bool>("FeedBackSatuts")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Massege")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -112,6 +109,9 @@ namespace ZADALKHAIR.Migrations
 
                     b.Property<DateTime>("SatutsUpdate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Sex")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("FeedBackID");
 

@@ -13,31 +13,34 @@
     <thead>
         <tr>
             <th>
-                <label asp-for="@Model??.ContactEmail" class="col-form-label"></label>                 
+                @Html.DisplayNameFor(model => model.ContactID)
             </th>
             <th>
-                <label asp-for="@Model??.ContactName" class="col-form-label"></label>
+                @Html.DisplayNameFor(model => model.ContactEmail)
             </th>
             <th>
-                <label asp-for="@Model??.ContactPhoneNumber" class="col-form-label"></label>
+                @Html.DisplayNameFor(model => model.ContactName)
             </th>
             <th>
-                <label asp-for="@Model??.ContactCounrty" class="col-form-label"></label>            
+                @Html.DisplayNameFor(model => model.ContactPhoneNumber)
             </th>
             <th>
-                 <label asp-for="@Model??.ContactSubject" class="col-form-label"></label>
+                @Html.DisplayNameFor(model => model.ContactCounrty)
             </th>
             <th>
-                <label asp-for="@Model??.ContactMassege" class="col-form-label"></label>
+                @Html.DisplayNameFor(model => model.ContactSubject)
             </th>
             <th>
-                <label asp-for="@Model??.ContactSatuts" class="col-form-label"></label>
+                @Html.DisplayNameFor(model => model.ContactMassege)
             </th>
             <th>
-                <label asp-for="@Model??.CreatedAt" class="col-form-label"></label>
+                @Html.DisplayNameFor(model => model.ContactSatuts)
             </th>
             <th>
-                <label asp-for="@Model??.SatutsUpdate" class="col-form-label"></label>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SatutsUpdate)
             </th>
             <th></th>
         </tr>
@@ -45,6 +48,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @item.ContactID
+            </td>
             <td>
                 @item.ContactEmail
             </td>
@@ -76,7 +82,7 @@
                 }
                 else
                 {
-                    @item.SatutsUpdate             
+                    @item.SatutsUpdate
                 }
 
 

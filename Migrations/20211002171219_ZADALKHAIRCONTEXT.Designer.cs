@@ -10,8 +10,8 @@ using ZADALKHAIR.Data;
 namespace ZADALKHAIR.Migrations
 {
     [DbContext(typeof(ZADALKHAIRContext))]
-    [Migration("20211001160252_ZADALKHAIR")]
-    partial class ZADALKHAIR
+    [Migration("20211002171219_ZADALKHAIRCONTEXT")]
+    partial class ZADALKHAIRCONTEXT
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,8 +49,8 @@ namespace ZADALKHAIR.Migrations
 
                     b.Property<string>("ContactPhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
 
                     b.Property<bool>("ContactSatuts")
                         .HasColumnType("bit");
@@ -68,6 +68,56 @@ namespace ZADALKHAIR.Migrations
                     b.HasKey("ContactID");
 
                     b.ToTable("Contact");
+                });
+
+            modelBuilder.Entity("ZADALKHAIR.Models.FeedBack", b =>
+                {
+                    b.Property<int>("FeedBackID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CounrtyCode")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("FeedBackSatuts")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Massege")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Rate")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("SatutsUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Sex")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("FeedBackID");
+
+                    b.ToTable("FeedBack");
                 });
 #pragma warning restore 612, 618
         }
