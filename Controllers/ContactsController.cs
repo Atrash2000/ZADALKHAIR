@@ -10,15 +10,16 @@ using ZADALKHAIR.Models;
 
 namespace ZADALKHAIR.Controllers
 {
+
     public class ContactsController : Controller
     {
         private readonly ZADALKHAIRContext _context;
-
+        
         public ContactsController(ZADALKHAIRContext context)
         {
             _context = context;
         }
-
+        [Route("All-Contacts")]
         // GET: Contacts
         public async Task<IActionResult> Index()
         {
@@ -42,7 +43,7 @@ namespace ZADALKHAIR.Controllers
 
             return View(contact);
         }
-
+        [Route("Contacts")]
         // GET: Contacts/Create
         public IActionResult Create()
         {
@@ -54,6 +55,7 @@ namespace ZADALKHAIR.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Contacts")]
         public async Task<IActionResult> Create([Bind("ContactID,ContactEmail,ContactName,ContactPhoneNumber,ContactCounrty,ContactSubject,ContactMassege")] Contact contact)
         {
             if (ModelState.IsValid)
