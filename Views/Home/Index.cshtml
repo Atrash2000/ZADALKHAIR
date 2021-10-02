@@ -2,7 +2,28 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<header>
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/images/home-hedder1.jpeg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="/images/home-hedder2.jpeg" class="d-block w-100" alt="...">
+            </div>
+            @*<div class="carousel-item">
+                    <img src="..." class="d-block w-100" alt="...">
+                </div>*@
+        </div>
+    </div>
+
+    <div class="py-5" style="background-color: #f4f4f4">
+        <div class="container text-center">
+            <h2 class="my-4">About Us</h2>
+            <p style="font-size: 20px;">
+                KNOX Technical Services LLC has emerged as one of the leading & innovative maintenance service providers in the Emirate of Dubai. KNOX provides maintenance solutions to residential and commercial properties developed by Emaar, Nakheel, Union Properties in the areas including but not limited to Meadows, Springs, Lakes, Emirates Hills, Arabian Ranches, The Villa, JBR, JLT, Jumeirah Islands, Jumeirah Park, Umm Suqeim, Al Wasl, Green Community, DIP, Motor City, Victory Heights, Palm Jumeirah, Jebel Ali Free Zone and more…
+            </p>
+            <a asp-action="AboutUs" asp-controller="Home" class="btn rounded px-4 py-2 hvr-shutter-in-horizontal my-4" style="border: 1px solid #2B2B2B; font-size: 15px;">FIND OUT MORE</a>
+        </div>
+    </div>
+</header>
