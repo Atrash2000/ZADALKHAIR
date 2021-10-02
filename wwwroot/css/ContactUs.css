@@ -1,6 +1,14 @@
-﻿.contact-info {
-    background-color: #efefef;
+﻿.contact-form-hedder:before {
+    content: "";
+    position: absolute;
+    top: 74px;
+    width: 80px;
+    height: 1px;
+    background-color: #3498DB;
+}
 
+.contact-info {
+    background-color: #efefef;
 }
 
 .icon {
@@ -11,3 +19,14 @@
 textarea {
     resize: vertical
 }
+
+input[type="text"]:not(.subscribe-search), input[type="email"], textarea, select {
+    background-color: #f2f2f2 !important;
+    box-shadow: none !important;
+}
+
+    input[type="text"]:focus:not(.subscribe-search), input[type="email"]:focus, textarea:focus, select:focus {
+        border: none;
+        background-color: #fff !important;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px !important;
+    }
