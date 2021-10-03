@@ -44,6 +44,14 @@ namespace ZADALKHAIR.Controllers
 
             return View(user);
         }
+
+        [HttpGet]
+        [Route("Login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         [Route("Admin/AddEmployee")]
         // GET: Users/Create
         public IActionResult Create()
