@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ZADALKHAIR.Data;
 
-namespace ZADALKHAIR.Models
+namespace ZADALKHAIR.Controllers
 {
     public class UsersController : Controller
     {
