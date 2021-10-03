@@ -1,6 +1,5 @@
-﻿
-@{
-    ViewData["Title"] = "Home Page";
+﻿@{
+    ViewData["Title"] = "Zad Al-Khair Home";
 }
 
 <header>
@@ -43,8 +42,8 @@
                             <div class="px-25 py-20">
                                 <div class="rate-area">
                                     <div class="row px-5">
-                                        <span class="testimonial-date-created">@item.CreatedAt</span>
-                                        <div>
+                                        <span class="testimonial-date-created">@item.CreatedAt.ToShortDateString()</span>
+                                        <div style="margin: 0px 0px 0px auto;">
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
