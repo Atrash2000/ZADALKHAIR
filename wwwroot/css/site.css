@@ -495,3 +495,24 @@ aside .side-inner {
         }
 
 /* End Sidebar */
+
+/* Start Swiper */
+
+.swiper {
+    width: 100%;
+    height: auto;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+    cursor: all-scroll;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    width: 318px !important;
+    border-radius: 1rem;
+    background: #fff;
+}

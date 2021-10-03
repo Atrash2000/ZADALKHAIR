@@ -10,8 +10,8 @@ using ZADALKHAIR.Data;
 namespace ZADALKHAIR.Migrations
 {
     [DbContext(typeof(ZADALKHAIRContext))]
-    [Migration("20211002171219_ZADALKHAIRCONTEXT")]
-    partial class ZADALKHAIRCONTEXT
+    [Migration("20211003003527_ZADALKHAIR")]
+    partial class ZADALKHAIR
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -118,6 +118,51 @@ namespace ZADALKHAIR.Migrations
                     b.HasKey("FeedBackID");
 
                     b.ToTable("FeedBack");
+                });
+
+            modelBuilder.Entity("ZADALKHAIR.Models.User", b =>
+                {
+                    b.Property<int>("UserID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("USerCountryCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UserCreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserFirstName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("UserLastName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("UserPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserPhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserRoleType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserID");
+
+                    b.ToTable("User");
                 });
 #pragma warning restore 612, 618
         }

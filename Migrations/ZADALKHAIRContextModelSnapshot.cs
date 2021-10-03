@@ -148,8 +148,7 @@ namespace ZADALKHAIR.Migrations
 
                     b.Property<string>("UserPassword")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserPhoneNumber")
                         .IsRequired()

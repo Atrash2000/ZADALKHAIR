@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using ZADALKHAIR.Data;
 using ZADALKHAIR.Models;
 
 namespace ZADALKHAIR.Controllers
@@ -13,13 +15,17 @@ namespace ZADALKHAIR.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ZADALKHAIRContext _context;
+
+        public HomeController(ILogger<HomeController> logger, ZADALKHAIRContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            ViewData["feedback"] = await _context.FeedBack.ToListAsync();
             return View();
         }
 

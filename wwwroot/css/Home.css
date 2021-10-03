@@ -1,0 +1,83 @@
+﻿.feedback-area {
+    background: url(https://knox.ae/wp-content/uploads/2020/01/skyline.png);
+    background-repeat: no-repeat !important;
+    background-position: center bottom !important;
+    background-size: cover;
+    width: 100%;
+    height: 700px;
+}
+
+.testimonial-card {
+    border: 2px solid #CCCCCC;
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    background-color: white;
+}
+
+.testimonial-card-text {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 28px;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.testimonial-date-created {
+    font-size: 16px;
+    color: white;
+    font-family: 'Lobster', cursive;
+}
+
+i {
+    font-size: 14px;
+    color: white;
+    font-weight: normal;
+}
+
+.rate-area {
+    background-color: #7E8C8D;
+    padding: 15px 0;
+    box-shadow: 2px 0px 2px #555;
+    border: 1px solid #fff;
+    width: 315px;
+    clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 7% 52%, 0% 0%);
+    margin-bottom: 18px;
+}
+
+.testimonial-area img {
+    border: 3px solid #fff;
+    border-radius: 50%;
+    height: 69px !important;
+    width: 69px !important;
+}
+
+.py-20 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.px-25 {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.px-30 {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
+
+.person-info {
+    background: #7E8C8D;
+    padding: 25px 20px 20px 20px;
+    width: 100%;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    height: 100%;
+    clip-path: polygon(0 100%, 100% 100%, 100% 0, 26% 0, 22.2% 21%, 17% 0, 0 0);
+}
+
+.person-name {
+    font-size: 1.4rem;
+    margin: 12px 15px;
+    font-family: 'Oswald', sans-serif;
+}
