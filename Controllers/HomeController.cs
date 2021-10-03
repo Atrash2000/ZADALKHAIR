@@ -16,11 +16,13 @@ namespace ZADALKHAIR.Controllers
         private readonly ILogger<HomeController> _logger;
 
         private readonly ZADALKHAIRContext _context;
+        private readonly FeedBacksController feedBacksController;
 
         public HomeController(ILogger<HomeController> logger, ZADALKHAIRContext context)
         {
             _logger = logger;
             _context = context;
+            feedBacksController = new FeedBacksController(context);
         }
 
         public async Task<IActionResult> Index()
