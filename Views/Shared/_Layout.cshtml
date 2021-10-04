@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="~/css/AboutUs.css" />
     <link rel="stylesheet" href="~/css/ContactUs.css" />
     <link rel="stylesheet" href="~/css/Home.css" />
-    <link rel="stylesheet" href="~/css/Login.css" />
+    @RenderSection("Style", required: false)
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body onscroll="controllNavBar()">
@@ -125,12 +125,6 @@
                                                     +971562772813
                                                 </a>
                                             </li>
-                                            @*<li class="number2">
-                                                    <a href="#">
-                                                        <span class="__cf_email__"
-                                                              data-cfemail="5635393822373522163537242137253e7835393b">[email&#160;protected]</span>
-                                                    </a>
-                                                </li>*@
                                         </ul>
 
                                         <ul class="footer-social">
@@ -154,12 +148,10 @@
                                             <a href="#" class="mr-5">Home</a>
                                             <a href="#" class="ml-5">About</a>
                                         </li>
-                                        @*<li><a href="#">About</a></li>*@
                                         <li class="my-4">
                                             <a href="#" class="mr-5">Services</a>
                                             <a href="#" class="ml-5">Blog</a>
                                         </li>
-                                        @*<li><a href="#">Blog</a></li>*@
                                         <li><a href="#">Contact</a></li>
                                     </ul>
                                 </div>
