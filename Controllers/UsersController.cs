@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using ZADALKHAIR.Data;
 using ZADALKHAIR.Models;
 
@@ -63,7 +67,39 @@ namespace ZADALKHAIR.Controllers
                     return NotFound();
                 }
                 else
-                    return RedirectToAction(nameof(Index));
+                {
+                    var result = _context.User.Where(u => u.UserEmail == login.Email).SingleOrDefault();
+
+                    var userClaims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, $"{result.UserLastName} {result.UserLastName}"),
+                    new Claim(ClaimTypes.Email, result.UserEmail),
+                    new Claim(ClaimTypes.Role, result.UserRoleType)
+                 };
+
+                    var userIdentity = new ClaimsIdentity(userClaims, "User Identity");
+
+                    var userPrincipal = new ClaimsPrincipal(new[] { userIdentity });
+                    await HttpContext.SignInAsync(userPrincipal);
+
+                    var tokenhandler = new JwtSecurityTokenHandler();
+                    var tokenkey = Encoding.ASCII.GetBytes("[SECRET USED TO SIGN AND VERIFY JWT TOKENS, IT CAN BE ANY STRING]");
+                    var tokendesciptor = new SecurityTokenDescriptor()
+                    {
+                        Subject = new ClaimsIdentity(new Claim[] {
+                    new Claim(ClaimTypes.PrimarySid, result.UserID.ToString()),
+                    new Claim(ClaimTypes.Name, result.UserEmail),
+                    new Claim(ClaimTypes.Role, result.UserRoleType)
+
+                }),
+                        Expires = DateTime.UtcNow.AddHours(1),
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenkey), SecurityAlgorithms.HmacSha256Signature)
+
+                    };
+                    var token = tokenhandler.CreateToken(tokendesciptor);
+                    TempData["token"] = tokenhandler.WriteToken(token);
+                    return RedirectToAction("Dashboard", "Admin");
+                }
             }
             return View(login);
         }

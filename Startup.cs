@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +9,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ZADALKHAIR.Data;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using ZADALKHAIR.CustomHandler;
 
 namespace ZADALKHAIR
 {
@@ -25,10 +27,30 @@ namespace ZADALKHAIR
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-
             services.AddDbContext<ZADALKHAIRContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ZADALKHAIRContext")));
+
+            services.AddAuthentication("CookieAuthentication")
+                 .AddCookie("CookieAuthentication", config =>
+                 {
+                     config.Cookie.Name = "UserLoginCookie"; // Name of cookie     
+                     config.LoginPath = "/login"; // Path for the redirect to user login page    
+                     config.AccessDeniedPath = "/";
+                 });
+
+            services.AddAuthorization(config =>
+            {
+                var userAuthPolicyBuilder = new AuthorizationPolicyBuilder();
+                config.DefaultPolicy = userAuthPolicyBuilder
+                                    .RequireAuthenticatedUser()
+                                    .RequireClaim(ClaimTypes.Role)
+                                    .Build();
+            });
+
+            services.AddScoped<IAuthorizationHandler, PoliciesAuthorizationHandler>();
+            services.AddScoped<IAuthorizationHandler, RolesAuthorizationHandler>();
+
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +70,8 @@ namespace ZADALKHAIR
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

@@ -3,3 +3,13 @@
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
+
+@*<h1 class="text-white">@TempData["token"]</h1>*@
+
+@section Scripts {
+    <script>
+        if ("@TempData["token"]" != "") {
+            localStorage.setItem("token", "@TempData["token"]");
+        }
+    </script>
+}
