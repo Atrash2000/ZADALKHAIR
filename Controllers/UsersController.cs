@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -62,11 +63,7 @@ namespace ZADALKHAIR.Controllers
             if (ModelState.IsValid)
             {
                 login.Password = ComputeStringToSha256Hash(login.Password);
-                if (!await UserLoginExists(login.Email, login.Password))
-                {
-                    return NotFound();
-                }
-                else
+                if (await UserLoginExists(login.Email, login.Password))
                 {
                     var result = _context.User.Where(u => u.UserEmail == login.Email).SingleOrDefault();
 
@@ -77,7 +74,7 @@ namespace ZADALKHAIR.Controllers
                     new Claim(ClaimTypes.Role, result.UserRoleType)
                  };
 
-                    var userIdentity = new ClaimsIdentity(userClaims, "User Identity");
+                    var userIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                     var userPrincipal = new ClaimsPrincipal(new[] { userIdentity });
                     await HttpContext.SignInAsync(userPrincipal);

@@ -23,7 +23,7 @@ namespace ZADALKHAIR.CustomHandler
             if (context.User == null || !context.User.Identity.IsAuthenticated)
             {
                 context.Fail();
-                return Task.CompletedTask;
+                /*return Task.CompletedTask;*/
             }
 
             var validRole = false;

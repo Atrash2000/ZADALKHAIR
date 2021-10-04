@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 namespace ZADALKHAIR.Controllers
 {
     [Route("{Controller}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class AdminController : Controller
     {
+        [Authorize(Roles = "Admin")]
         public IActionResult Dashboard()
         {
             return View();
