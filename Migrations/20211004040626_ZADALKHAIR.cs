@@ -51,6 +51,24 @@ namespace ZADALKHAIR.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Service",
+                columns: table => new
+                {
+                    ServiceID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ServiceTitle = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    ServiceDiscription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ServiceStartingPrice = table.Column<double>(type: "float", nullable: false),
+                    ServiceImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ServiceApproved = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Service", x => x.ServiceID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
@@ -78,6 +96,9 @@ namespace ZADALKHAIR.Migrations
 
             migrationBuilder.DropTable(
                 name: "FeedBack");
+
+            migrationBuilder.DropTable(
+                name: "Service");
 
             migrationBuilder.DropTable(
                 name: "User");

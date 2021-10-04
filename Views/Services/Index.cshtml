@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ZADALKHAIR.Models.Service>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceDiscription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceStartingPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceApproved)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceDiscription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceStartingPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceApproved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ServiceID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ServiceID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ServiceID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

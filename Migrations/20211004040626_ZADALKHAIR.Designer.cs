@@ -10,7 +10,7 @@ using ZADALKHAIR.Data;
 namespace ZADALKHAIR.Migrations
 {
     [DbContext(typeof(ZADALKHAIRContext))]
-    [Migration("20211003003527_ZADALKHAIR")]
+    [Migration("20211004040626_ZADALKHAIR")]
     partial class ZADALKHAIR
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -118,6 +118,40 @@ namespace ZADALKHAIR.Migrations
                     b.HasKey("FeedBackID");
 
                     b.ToTable("FeedBack");
+                });
+
+            modelBuilder.Entity("ZADALKHAIR.Models.Service", b =>
+                {
+                    b.Property<int>("ServiceID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("ServiceApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ServiceDiscription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ServiceImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("ServiceStartingPrice")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ServiceTitle")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("ServiceID");
+
+                    b.ToTable("Service");
                 });
 
             modelBuilder.Entity("ZADALKHAIR.Models.User", b =>

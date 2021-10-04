@@ -51,6 +51,22 @@ namespace ZADALKHAIR.Controllers
         {
             return View();
         }
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login([Bind("Email, Password")] Login login)
+        {
+            if (ModelState.IsValid)
+            {
+                login.Password = ComputeStringToSha256Hash(login.Password);
+                if (!await UserLoginExists(login.Email, login.Password))
+                {
+                    return NotFound();
+                }
+                else
+                    return RedirectToAction(nameof(Index));
+            }
+            return View(login);
+        }
 
         [Route("Admin/AddEmployee")]
         // GET: Users/Create
@@ -178,6 +194,10 @@ namespace ZADALKHAIR.Controllers
         private bool UserExists(int id)
         {
             return _context.User.Any(e => e.UserID == id);
+        }
+        private async Task<bool> UserLoginExists(string email, string password)
+        {
+            return await _context.User.AnyAsync(e => e.UserEmail == email && e.UserPassword == password);
         }
     }
 }
