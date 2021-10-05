@@ -63,3 +63,12 @@ function closeSidebar() {
     sidebar.style.transition = "right 1s";
     btnClose.classList.remove("display-close-btn");
 }
+
+/* Spinner section */
+
+window.onload = () => {
+    setTimeout(() => {
+        document.querySelector(".spinner").classList.add("d-none");
+    }, 2000)
+}
+
