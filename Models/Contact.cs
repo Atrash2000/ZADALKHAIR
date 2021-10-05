@@ -35,7 +35,9 @@ namespace ZADALKHAIR.Models
         [Display(Name = "Massege")]
         public String ContactMassege { get; set; }
         public bool ContactSatuts { get; set; } = false;
+        [Display(Name = "Create At")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        [Display(Name = "Update At")]
         public DateTime SatutsUpdate { get; set; }
     }
 }

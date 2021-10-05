@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace ZADALKHAIR.CustomHandler
             if (context.User == null || !context.User.Identity.IsAuthenticated)
             {
                 context.Fail();
-                /*return Task.CompletedTask;*/
+                return Task.CompletedTask;
             }
 
             var validRole = false;
@@ -52,5 +53,6 @@ namespace ZADALKHAIR.CustomHandler
             return Task.CompletedTask;
 
         }
+
     }
 }
