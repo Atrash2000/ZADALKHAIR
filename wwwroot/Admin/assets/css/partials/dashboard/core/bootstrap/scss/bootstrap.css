@@ -1928,7 +1928,7 @@ select.form-control:not([size]):not([multiple]) {
 
 select.form-control:focus::-ms-value {
   color: #495057;
-  background-color: #fff;
+  /*background-color: #fff;*/
 }
 
 .form-control-file,

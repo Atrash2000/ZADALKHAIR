@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -151,6 +152,10 @@ namespace ZADALKHAIR.Controllers
         }
 
         // GET: Users/Edit/5
+        [HttpGet]
+        [Authorize]
+        [Authorize(Roles = "Admin")]
+        /*[Route("Admin/profile/{id}")]*/
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -171,7 +176,7 @@ namespace ZADALKHAIR.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserID,UserEmail,UserFirstName,UserLastName,UserPhoneNumber,USerCountryCode,UserRoleType,UserCreateAt,UserPassword")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("UserID,UserEmail,UserFirstName,UserLastName,UserPhoneNumber,USerCountryCode,UserRoleType,UserPassword")] User user)
         {
             if (id != user.UserID)
             {
@@ -196,7 +201,7 @@ namespace ZADALKHAIR.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Edit), id);
             }
             return View(user);
         }

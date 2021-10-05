@@ -94,6 +94,14 @@
 
 /* offline-doc */
 
+select option {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.mt-6 {
+    margin-top: 6rem;
+}
+
 .offline-doc .navbar.navbar-transparent {
   padding-top: 25px;
   border-bottom: none;
