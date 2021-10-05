@@ -12,6 +12,7 @@ namespace ZADALKHAIR.Controllers
     public class AdminController : Controller
     {
         [Authorize(Roles = "Admin")]
+        [HttpGet]
         public IActionResult Dashboard()
         {
             return View();

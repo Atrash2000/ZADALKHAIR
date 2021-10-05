@@ -27,6 +27,7 @@ namespace ZADALKHAIR.Controllers
         }
 
         // GET: Contacts/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -40,7 +41,6 @@ namespace ZADALKHAIR.Controllers
             {
                 return NotFound();
             }
-
             return View(contact);
         }
         [Route("Contacts")]

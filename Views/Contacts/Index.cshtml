@@ -2,97 +2,114 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h1>Index</h1>
+<h2 class="text-white">Contact Us</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactEmail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactPhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactCounrty)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactSubject)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactMassege)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactSatuts)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SatutsUpdate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @item.ContactID
-            </td>
-            <td>
-                @item.ContactEmail
-            </td>
-            <td>
-                @item.ContactName
-            </td>
-            <td>
-                @item.ContactPhoneNumber
-            </td>
-            <td>
-                @item.ContactCounrty
-            </td>
-            <td>
-                @item.ContactSubject
-            </td>
-            <td>
-                @item.ContactMassege
-            </td>
-            <td>
-                @item.ContactSatuts
-            </td>
-            <td>
-                @item.CreatedAt
-            </td>
-            <td>
-                @if (item.SatutsUpdate.ToString() == "1/01/0001 12:00:00 AM")
-                {
-                    <p>Not Set</p>
-                }
-                else
-                {
-                    @item.SatutsUpdate
-                }
 
-
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ContactID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ContactID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ContactID">Delete</a>
-            </td>
-        </tr>
+@if (Model != null)
+{
+    <table class="table text-center">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContactID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContactName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContactPhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContactSatuts)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SatutsUpdate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="thead-light">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.ContactID
+                    </td>
+                    <td>
+                        @item.ContactName
+                    </td>
+                    <td>
+                        (@item.ContactCounrty) @item.ContactPhoneNumber
+                    </td>
+                    <td>
+                        @item.ContactSatuts
+                    </td>
+                    <td>
+                        @item.CreatedAt.ToString().Split(" ")[0]
+                    </td>
+                    <td>
+                        @if (item.SatutsUpdate.ToString() == "1/01/0001 12:00:00 AM")
+                        {
+                            <p>Not Set</p>
+                        }
+                        else
+                        {
+                            @item.SatutsUpdate.ToString().Split(" ")[0];
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ContactID">Edit</a> |
+                        <button type="button" onclick="displayContactMessage(@item.ContactID)" data-toggle="modal" class="btn" data-target="#exampleModalCenter">Details</button> |
+                        <a asp-action="Delete" asp-route-id="@item.ContactID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-    </tbody>
-</table>
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row px-2" style="flex-direction: column">
+                    <h3 class="modal-title" id="exampleModalLongTitle">@Model.FirstOrDefault().ContactSubject</h3>
+                    <span class="mt-1">@Model.FirstOrDefault().ContactEmail</span><br />
+                    <span>@Model.FirstOrDefault().CreatedAt.ToString().Split(" ")[0]</span>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Model.FirstOrDefault().ContactMassege
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function displayContactMessage(contactId) {
+            $.ajax({
+                type: 'GET',
+                url: '/Contacts/Details',
+                data: { id: contactId },
+                cache: false,
+            });
+        }
+    </script>
+}

@@ -12,6 +12,8 @@ using ZADALKHAIR.Data;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using ZADALKHAIR.CustomHandler;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace ZADALKHAIR
 {
@@ -30,12 +32,15 @@ namespace ZADALKHAIR
             services.AddDbContext<ZADALKHAIRContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ZADALKHAIRContext")));
 
+
             services.AddAuthentication("CookieAuthentication")
                  .AddCookie("CookieAuthentication", config =>
                  {
                      config.Cookie.Name = "UserLoginCookie"; // Name of cookie     
-                     config.LoginPath = "/login"; // Path for the redirect to user login page    
-                     config.AccessDeniedPath = "/";
+                     config.LoginPath = new PathString("/login"); // Path for the redirect to user login page 
+                     config.AccessDeniedPath = new PathString("/login");
+                     /*config.ReturnUrlParameter = "/login";*/
+                     /*config.LogoutPath = new PathString("/login");*/
                  });
 
             services.AddAuthorization(config =>

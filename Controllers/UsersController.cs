@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -54,6 +55,11 @@ namespace ZADALKHAIR.Controllers
         [Route("Login")]
         public IActionResult Login()
         {
+            Response.Cookies.Delete("UserLoginCookie", new CookieOptions()
+            {
+                Secure = true,
+            });
+
             return View();
         }
         [HttpPost]
