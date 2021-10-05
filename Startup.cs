@@ -36,8 +36,8 @@ namespace ZADALKHAIR
                      config.Cookie.Name = "UserLoginCookie"; // Name of cookie     
                      config.LoginPath = "/login"; // Path for the redirect to user login page    
                      config.AccessDeniedPath = "/";
-                 });
-
+                             });
+               
             services.AddAuthorization(config =>
             {
                 var userAuthPolicyBuilder = new AuthorizationPolicyBuilder();
@@ -74,7 +74,7 @@ namespace ZADALKHAIR
             app.UseAuthentication();
 
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
