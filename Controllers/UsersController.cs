@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -14,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using ZADALKHAIR.Data;
 using ZADALKHAIR.Models;
 
@@ -89,7 +91,7 @@ namespace ZADALKHAIR.Controllers
                     var userPrincipal = new ClaimsPrincipal(new[] { userIdentity });
                     await HttpContext.SignInAsync(userPrincipal);
 
-                    var tokenhandler = new JwtSecurityTokenHandler();
+                    /*var tokenhandler = new JwtSecurityTokenHandler();
                     var tokenkey = Encoding.ASCII.GetBytes("[SECRET USED TO SIGN AND VERIFY JWT TOKENS, IT CAN BE ANY STRING]");
                     var tokendesciptor = new SecurityTokenDescriptor()
                     {
@@ -104,7 +106,7 @@ namespace ZADALKHAIR.Controllers
 
                     };
                     var token = tokenhandler.CreateToken(tokendesciptor);
-                    TempData["token"] = tokenhandler.WriteToken(token);
+                    Response.Cookies.Append("token", token.ToString());*/
                     return RedirectToAction("Dashboard", "Admin");
                 }
             }
@@ -161,7 +163,7 @@ namespace ZADALKHAIR.Controllers
         [Route("Admin/profile/{id?}")]
         public async Task<IActionResult> Edit(int? id)
         {
-            /*ViewData["cookies"] = Request.Cookies["UserLoginCookie"].ToString();*/
+            TempData["user"] = HttpUtility.UrlDecode(Request.Cookies["UserLoginCookie"].ToString());
             if (id == null)
             {
                 return NotFound();

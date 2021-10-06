@@ -6,6 +6,10 @@
     int x = 0;
 }
 
+@{
+    int? contactId;
+}
+
 <h2 class="text-white">Contact Us</h2>
 
 @if (Model != null && Model.Count > 0)
@@ -75,34 +79,35 @@
                         <a asp-action="Delete" asp-route-id="@item.ContactID">Delete</a>
                     </td>
                 </tr>
+
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="row px-2" style="flex-direction: column">
+                                    <h3 class="modal-title" id="exampleModalLongTitle">@item.ContactSubject</h3>
+                                    <span>@item.ContactEmail</span><br />
+                                    <span>@item.CreatedAt.ToString().Split(" ")[0]</span>
+                                </div>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                @item.ContactMassege
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
         </tbody>
     </table>
 }
-<!-- Modal -->
 
-@*<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="row px-2" style="flex-direction: column">
-                    <h3 class="modal-title" id="exampleModalLongTitle">@Model[x].ContactSubject.ToString()</h3>
-                    <span>@Model[x].ContactEmail.ToString()</span><br />
-                    <span>@Model[x].CreatedAt.ToString().Split(" ")[0]</span>
-                </div>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                @Model[x].ContactMassege.ToString()
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>*@
+<!-- Modal -->
 
 @section Scripts {
     <script>
