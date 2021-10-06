@@ -54,17 +54,20 @@ namespace ZADALKHAIR.Controllers
 
         [HttpGet]
         [Route("Login")]
-        public IActionResult Login()
+        
+        public IActionResult Login(string? ReturnUrl)
         {
             Response.Cookies.Delete("UserLoginCookie", new CookieOptions()
             {
                 Secure = true,
             });
-
+            if (Url.IsLocalUrl(ReturnUrl))
+                return RedirectToAction(nameof(Login));
             return View();
         }
         [HttpPost]
         [Route("Login")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([Bind("Email, Password")] Login login)
         {
             if (ModelState.IsValid)
