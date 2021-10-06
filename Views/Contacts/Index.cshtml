@@ -75,50 +75,30 @@
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.ContactID">Edit</a> |
-                        <button type="button" asp-action="Details" asp-route-id="@item.ContactID">Details</button> |
+                        <button type="button" data-id="@item.ContactID" data-toggle="modal" class="btn details" data-target="#exampleModalCenter">Details</button> |
                         <a asp-action="Delete" asp-route-id="@item.ContactID">Delete</a>
                     </td>
                 </tr>
 
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div class="row px-2" style="flex-direction: column">
-                                    <h3 class="modal-title" id="exampleModalLongTitle">@item.ContactSubject</h3>
-                                    <span>@item.ContactEmail</span><br />
-                                    <span>@item.CreatedAt.ToString().Split(" ")[0]</span>
-                                </div>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                @item.ContactMassege
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             }
         </tbody>
     </table>
 }
 
 <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
 
 @section Scripts {
-    <script>
-        function displayContactMessage(contactId) {
-            x = contactId;
-            $.ajax({
-                type: 'GET',
-                url: '/Contacts/Details',
-                data: { id: contactId },
-                cache: false,
-            });
-        }
-    </script>
+<script>
+    $(function () {
+        $('button.details').on('click', function () {
+            $('.modal-content').load(`/Admin/Contact/Details/injuction/${$(this).data('id')}`);
+        });
+    })
+</script>
 }

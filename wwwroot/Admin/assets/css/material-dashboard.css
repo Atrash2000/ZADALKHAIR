@@ -16779,8 +16779,8 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   padding: 5px;
 }
 
-.table>tbody>tr {
-  position: relative;
+.table > tbody > tr {
+    position: relative;
 }
 
 .table-shopping>thead>tr>th {

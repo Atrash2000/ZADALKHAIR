@@ -83,10 +83,8 @@ namespace ZADALKHAIR.Controllers
 
                     var userClaims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Name, $"{result.UserFirstName} {result.UserLastName}"),
-                    new Claim(ClaimTypes.Email, result.UserEmail),
-                    new Claim(ClaimTypes.Role, result.UserRoleType),
-                   
+                    new Claim(ClaimTypes.PrimarySid, result.UserID.ToString()),
+                    new Claim(ClaimTypes.Role, result.UserRoleType)
                  };
 
                     var userIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -166,10 +164,7 @@ namespace ZADALKHAIR.Controllers
         [Route("Admin/profile/{id?}")]
         public async Task<IActionResult> Edit(int? id)
         {
-            var myCookie = Request.Cookies["UserLoginCookie"];
-            //myCookie != null;
-            // myCookie.Length > 0;
-            TempData["user"] = HttpUtility.UrlDecode(Request.Cookies["UserLoginCookie"].ToString());
+            /*TempData["user"] = HttpUtility.UrlDecode(Request.Cookies["UserLoginCookie"].ToString());*/
             if (id == null)
             {
                 return NotFound();

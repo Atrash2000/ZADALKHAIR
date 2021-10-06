@@ -30,21 +30,21 @@ namespace ZADALKHAIR.Controllers
 
         // GET: Contacts/Details/5
         [HttpGet]
-        public async Task<IActionResult> Details(int? id)
+        [Route("Admin/Contact/Details/injuction/{id}")]
+        public async Task<PartialViewResult> Details(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return PageNotFound();
             }
 
             var contact = await _context.Contact
                 .FirstOrDefaultAsync(m => m.ContactID == id);
             if (contact == null)
             {
-                return NotFound();
+                return PageNotFound();
             }
-            int contactId = contact.ContactID;
-            return RedirectToAction(nameof(Index), contactId);
+            return PartialView("_ContactDetails", contact);
         }
         [Route("Contacts")]
         // GET: Contacts/Create
@@ -156,6 +156,12 @@ namespace ZADALKHAIR.Controllers
         private bool ContactExists(int id)
         {
             return _context.Contact.Any(e => e.ContactID == id);
+        }
+
+        [HttpGet]
+        public PartialViewResult PageNotFound()
+        {
+            return PartialView("_PageNotFound");
         }
     }
 }
