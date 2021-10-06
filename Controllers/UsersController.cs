@@ -81,8 +81,7 @@ namespace ZADALKHAIR.Controllers
 
                     var userClaims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Name, $"{result.UserLastName} {result.UserLastName}"),
-                    new Claim(ClaimTypes.Email, result.UserEmail),
+                    new Claim(ClaimTypes.PrimarySid, result.UserID.ToString()),
                     new Claim(ClaimTypes.Role, result.UserRoleType)
                  };
 
@@ -163,7 +162,7 @@ namespace ZADALKHAIR.Controllers
         [Route("Admin/profile/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
-            TempData["user"] = HttpUtility.UrlDecode(Request.Cookies["UserLoginCookie"].ToString());
+            /*TempData["user"] = HttpUtility.UrlDecode(Request.Cookies["UserLoginCookie"].ToString());*/
             if (id == null)
             {
                 return NotFound();
