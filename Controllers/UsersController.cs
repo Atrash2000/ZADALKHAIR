@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using RestSharp;
 using ZADALKHAIR.Data;
 using ZADALKHAIR.Models;
 
@@ -63,6 +64,7 @@ namespace ZADALKHAIR.Controllers
             {
                 Secure = true,
             });
+            
             if (Url.IsLocalUrl(ReturnUrl))
                 return RedirectToAction(nameof(Login));
             return View();
@@ -81,9 +83,10 @@ namespace ZADALKHAIR.Controllers
 
                     var userClaims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Name, $"{result.UserLastName} {result.UserLastName}"),
+                    new Claim(ClaimTypes.Name, $"{result.UserFirstName} {result.UserLastName}"),
                     new Claim(ClaimTypes.Email, result.UserEmail),
-                    new Claim(ClaimTypes.Role, result.UserRoleType)
+                    new Claim(ClaimTypes.Role, result.UserRoleType),
+                   
                  };
 
                     var userIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -91,7 +94,7 @@ namespace ZADALKHAIR.Controllers
                     var userPrincipal = new ClaimsPrincipal(new[] { userIdentity });
                     await HttpContext.SignInAsync(userPrincipal);
 
-                    /*var tokenhandler = new JwtSecurityTokenHandler();
+                    var tokenhandler = new JwtSecurityTokenHandler();
                     var tokenkey = Encoding.ASCII.GetBytes("[SECRET USED TO SIGN AND VERIFY JWT TOKENS, IT CAN BE ANY STRING]");
                     var tokendesciptor = new SecurityTokenDescriptor()
                     {
@@ -106,7 +109,7 @@ namespace ZADALKHAIR.Controllers
 
                     };
                     var token = tokenhandler.CreateToken(tokendesciptor);
-                    Response.Cookies.Append("token", token.ToString());*/
+                    Response.Cookies.Append("token", token.ToString());
                     return RedirectToAction("Dashboard", "Admin");
                 }
             }
@@ -163,6 +166,9 @@ namespace ZADALKHAIR.Controllers
         [Route("Admin/profile/{id?}")]
         public async Task<IActionResult> Edit(int? id)
         {
+            var myCookie = Request.Cookies["UserLoginCookie"];
+            //myCookie != null;
+            // myCookie.Length > 0;
             TempData["user"] = HttpUtility.UrlDecode(Request.Cookies["UserLoginCookie"].ToString());
             if (id == null)
             {
