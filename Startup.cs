@@ -39,8 +39,6 @@ namespace ZADALKHAIR
                      config.Cookie.Name = "UserLoginCookie"; // Name of cookie     
                      config.LoginPath = new PathString("/login"); // Path for the redirect to user login page 
                      config.AccessDeniedPath = new PathString("/login");
-                     /*config.ReturnUrlParameter = "/login";*/
-                     /*config.LogoutPath = new PathString("/login");*/
                  });
 
             services.AddAuthorization(config =>
@@ -56,6 +54,7 @@ namespace ZADALKHAIR
             services.AddScoped<IAuthorizationHandler, RolesAuthorizationHandler>();
 
             services.AddControllersWithViews();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,6 +72,8 @@ namespace ZADALKHAIR
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 
