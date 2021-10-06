@@ -158,16 +158,18 @@ namespace ZADALKHAIR.Controllers
         /*[Route("Admin/profile/{id}")]*/
         public async Task<IActionResult> Edit(int? id)
         {
+            Login login = new Login();
+            
             if (id == null)
             {
                 return NotFound();
             }
-
             var user = await _context.User.FindAsync(id);
-            if (user == null)
+            if (user == null )
             {
                 return NotFound();
             }
+            
             return View(user);
         }
 
@@ -187,6 +189,7 @@ namespace ZADALKHAIR.Controllers
             {
                 try
                 {
+                    user.UserPassword = ComputeStringToSha256Hash(user.UserPassword);
                     _context.Update(user);
                     await _context.SaveChangesAsync();
                 }

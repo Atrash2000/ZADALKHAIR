@@ -58,7 +58,11 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label asp-for="UserEmail" class="bmd-label-floating">Email</label>
-                                        <input asp-for="UserEmail" type="email" class="form-control">
+                                        <input asp-for="UserEmail" type="email" class="form-control" readonly style="background-color: #ffffff00;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="UserPassword" class="bmd-label-floating">Update Password</label>
+                                        <input asp-for="UserPassword" type="password" placeholder="******" class="form-control">
                                     </div>
                                 </div>
                                 @*<div class="col-md-6">
