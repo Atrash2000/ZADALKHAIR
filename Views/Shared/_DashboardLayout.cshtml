@@ -149,11 +149,13 @@
 
     </div>
 
+    @RenderSection("contactDetails", required: false);
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
-<script>
+    <script>
         function openUserProfile() {
             let user = JSON.parse(localStorage.getItem("user"));
             const userId = user.primarysid;
@@ -164,6 +166,6 @@
             }*/
             window.location.href = window.location.href.replace(window.location.href, `/Admin/profile/${userId}`);
         }
-</script>
+    </script>
 </body>
 </html>

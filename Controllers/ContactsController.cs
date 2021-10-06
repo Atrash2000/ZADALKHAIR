@@ -43,7 +43,8 @@ namespace ZADALKHAIR.Controllers
             {
                 return NotFound();
             }
-            return View(contact);
+            int contactId = contact.ContactID;
+            return RedirectToAction(nameof(Index), contactId);
         }
         [Route("Contacts")]
         // GET: Contacts/Create
