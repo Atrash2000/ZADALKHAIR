@@ -1,34 +1,41 @@
-﻿@model IEnumerable<ZADALKHAIR.Models.Contact>
+﻿@model List<ZADALKHAIR.Models.Contact>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    int x = 0;
 }
 
 <h2 class="text-white">Contact Us</h2>
 
-@if (Model != null)
+@if (Model != null && Model.Count > 0)
 {
     <table class="table text-center">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.ContactID)
+                    <label asp-for="@Model??.ContactID"></label>
+            
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ContactName)
+                    <label asp-for="@Model??.ContactName"></label>
+              
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ContactPhoneNumber)
+                    <label asp-for="@Model??.ContactPhoneNumber"></label>
+                
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ContactSatuts)
+                    <label asp-for="@Model??.ContactSatuts"></label>
+             
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CreatedAt)
+                    <label asp-for="@Model??.CreatedAt"></label>
+                  
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.SatutsUpdate)
+                    <label asp-for="@Model??.SatutsUpdate"></label>
+    
                 </th>
                 <th></th>
             </tr>
@@ -64,7 +71,7 @@
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.ContactID">Edit</a> |
-                        <button type="button" onclick="displayContactMessage(@item.ContactID)" data-toggle="modal" class="btn" data-target="#exampleModalCenter">Details</button> |
+                        <button type="button" asp-action="Details" asp-route-id="@item.ContactID">Details</button> |
                         <a asp-action="Delete" asp-route-id="@item.ContactID">Delete</a>
                     </td>
                 </tr>
@@ -74,32 +81,33 @@
 }
 <!-- Modal -->
 
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+@*<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <div class="row px-2" style="flex-direction: column">
-                    <h3 class="modal-title" id="exampleModalLongTitle">@Model.FirstOrDefault().ContactSubject</h3>
-                    <span>@Model.FirstOrDefault().ContactEmail</span><br />
-                    <span>@Model.FirstOrDefault().CreatedAt.ToString().Split(" ")[0]</span>
+                    <h3 class="modal-title" id="exampleModalLongTitle">@Model[x].ContactSubject.ToString()</h3>
+                    <span>@Model[x].ContactEmail.ToString()</span><br />
+                    <span>@Model[x].CreatedAt.ToString().Split(" ")[0]</span>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                @Model.FirstOrDefault().ContactMassege
+                @Model[x].ContactMassege.ToString()
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 @section Scripts {
     <script>
         function displayContactMessage(contactId) {
+            x = contactId;
             $.ajax({
                 type: 'GET',
                 url: '/Contacts/Details',

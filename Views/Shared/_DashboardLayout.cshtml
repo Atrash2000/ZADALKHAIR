@@ -1,7 +1,4 @@
-﻿@{ 
-    int? id;
-}
-
+﻿
 <!DOCTYPE html>
 
 <html>
@@ -156,17 +153,17 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
-    <script>
+<script>
         function openUserProfile() {
             let user = JSON.parse(localStorage.getItem("user"));
             const userId = user.primarysid;
 
-            @*let id = window.location.href.split("/")[5];
+            /*let id = window.location.href.split("/")[5];
             if (id != userId && window.location.href.includes("Edit")) {
                 return;
-            }*@
+            }*/
             window.location.href = window.location.href.replace(window.location.href, `/Admin/profile/${userId}`);
         }
-    </script>
+</script>
 </body>
 </html>

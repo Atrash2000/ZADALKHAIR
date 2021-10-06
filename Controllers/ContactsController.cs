@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace ZADALKHAIR.Controllers
             _context = context;
         }
         [Route("All-Contacts")]
+        [Authorize(Roles = "Admin")]
         // GET: Contacts
         public async Task<IActionResult> Index()
         {
@@ -41,7 +43,7 @@ namespace ZADALKHAIR.Controllers
             {
                 return NotFound();
             }
-            return View(contact);
+            return PartialView(model: contact);
         }
         [Route("Contacts")]
         // GET: Contacts/Create
@@ -60,16 +62,15 @@ namespace ZADALKHAIR.Controllers
         {
             if (ModelState.IsValid)
             {
-                /*contact.ContactPhoneNumber = $"({contact.ContactCounrty}){contact.ContactPhoneNumber}";*/
                 contact.CreatedAt = DateTime.Now;
                 contact.ContactSatuts = false;
                 _context.Add(contact);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), "Home");
             }
             return View(contact);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Contacts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -90,6 +91,7 @@ namespace ZADALKHAIR.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ContactID,ContactEmail,ContactName,ContactPhoneNumber,ContactCounrty,ContactSubject,ContactMassege,ContactSatuts,CreatedAt,SatutsUpdate")] Contact contact)
         {
@@ -120,7 +122,7 @@ namespace ZADALKHAIR.Controllers
             }
             return View(contact);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Contacts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -138,7 +140,7 @@ namespace ZADALKHAIR.Controllers
 
             return View(contact);
         }
-
+        [Authorize(Roles = "Admin")]
         // POST: Contacts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -149,7 +151,7 @@ namespace ZADALKHAIR.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        
         private bool ContactExists(int id)
         {
             return _context.Contact.Any(e => e.ContactID == id);
