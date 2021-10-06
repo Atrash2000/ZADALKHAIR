@@ -1,4 +1,7 @@
-﻿@model ZADALKHAIR.Models.Login
+﻿@{ 
+    int? id;
+}
+
 <!DOCTYPE html>
 
 <html>
@@ -157,8 +160,12 @@
         function openUserProfile() {
             let user = JSON.parse(localStorage.getItem("user"));
             const userId = user.primarysid;
-            @Model??.ID = userId;
-            window.location.href = window.location.href.replace(window.location.href, `/Users/Edit/${@Model??.ID}`);
+
+            @*let id = window.location.href.split("/")[5];
+            if (id != userId && window.location.href.includes("Edit")) {
+                return;
+            }*@
+            window.location.href = window.location.href.replace(window.location.href, `/Admin/profile/${userId}`);
         }
 </script>
 </body>

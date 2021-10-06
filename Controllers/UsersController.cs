@@ -155,11 +155,10 @@ namespace ZADALKHAIR.Controllers
         [HttpGet]
         [Authorize]
         [Authorize(Roles = "Admin")]
-        /*[Route("Admin/profile/{id}")]*/
+        [Route("Admin/profile/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
-            Login login = new Login();
-            
+            /*ViewData["cookies"] = Request.Cookies["UserLoginCookie"].ToString();*/
             if (id == null)
             {
                 return NotFound();
