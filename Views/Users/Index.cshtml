@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<ZADALKHAIR.Models.User>
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
@@ -9,6 +8,9 @@
 
 <hr />
 
+@if (Model != null && Model.Count() > 0)
+<h2 class="text-white">Employees</h2>
+<hr />
 @if (Model != null && Model.Count() > 0)
 {
     <div class="user-card-container container">
