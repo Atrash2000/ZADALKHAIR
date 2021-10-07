@@ -9,6 +9,7 @@ namespace ZADALKHAIR.Models
     public class FeedBack
     {
         [Key]
+        [Display(Name = "Id")]
         public int FeedBackID { get; set; }
 
         [Required]
@@ -35,8 +36,11 @@ namespace ZADALKHAIR.Models
         [Required]
         [Display(Name = "Massege")]
         public String Massege { get; set; }
+        [Display(Name = "Is Active")]
         public bool FeedBackSatuts { get; set; } = false;
+        [Display(Name = "Created At")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
         public DateTime SatutsUpdate { get; set; }
 
         [Required]

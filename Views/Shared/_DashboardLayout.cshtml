@@ -14,6 +14,7 @@
     <link href="~/Admin/assets/css/material-dashboard.css" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="~/Admin/assets/demo/demo.css" rel="stylesheet" />
+    <link href="~/css/Users.css" rel="stylesheet" />
 </head>
 <body class="dark-edition">
     <div class="spinner">
@@ -50,21 +51,21 @@
                         </a>
                     </li>
                     <li class="nav-item ">
+                        <a class="nav-link" asp-action="index" asp-controller="Users">
+                            <i class="fas fa-user-alt"></i>
+                            <p>Employees</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
                         <a class="nav-link" asp-action="index" asp-controller="Contacts">
                             <i class="fal fa-id-badge"></i>
                             <p>Contact Us</p>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="./typography.html">
-                            <i class="material-icons">library_books</i>
-                            <p>Typography</p>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="./icons.html">
-                            <i class="material-icons">bubble_chart</i>
-                            <p>Icons</p>
+                        <a class="nav-link" asp-action="index" asp-controller="FeedBacks">
+                            <i class="fas fa-comments"></i>
+                            <p>Feedback</p>
                         </a>
                     </li>
                     <li class="nav-item ">

@@ -26,21 +26,23 @@ namespace ZADALKHAIR.Controllers
         }
 
         // GET: FeedBacks/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet]
+        [Route("Admin/Feedback/Details/injuction/{id}")]
+        public async Task<PartialViewResult> Details(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return PageNotFound();
             }
 
             var feedBack = await _context.FeedBack
                 .FirstOrDefaultAsync(m => m.FeedBackID == id);
             if (feedBack == null)
             {
-                return NotFound();
+                return PageNotFound();
             }
 
-            return View(feedBack);
+            return PartialView("_FeedbackDetails", feedBack);
         }
 
         // GET: FeedBacks/Create
@@ -148,6 +150,12 @@ namespace ZADALKHAIR.Controllers
         private bool FeedBackExists(int id)
         {
             return _context.FeedBack.Any(e => e.FeedBackID == id);
+        }
+
+        [HttpGet]
+        public PartialViewResult PageNotFound()
+        {
+            return PartialView("_PageNotFound");
         }
     }
 }

@@ -37,21 +37,23 @@ namespace ZADALKHAIR.Controllers
         }
 
         // GET: Users/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet]
+        [Route("Admin/User/Details/injuction/{id}")]
+        public async Task<PartialViewResult> Details(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                /*return NotFound();*/
             }
 
             var user = await _context.User
                 .FirstOrDefaultAsync(m => m.UserID == id);
             if (user == null)
             {
-                return NotFound();
+                /*return NotFound();*/
             }
 
-            return View(user);
+            return PartialView("_UserDetails", user);
         }
 
         [HttpGet]
