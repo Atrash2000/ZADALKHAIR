@@ -38,7 +38,7 @@
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="nav-item active  ">
+                    <li class="nav-item active">
                         <a class="nav-link" asp-action="Dashboard" asp-controller="Admin">
                             <i class="material-icons">dashboard</i>
                             <p>Dashboard</p>
@@ -167,6 +167,17 @@
             }*/
             window.location.href = window.location.href.replace(window.location.href, `/Admin/profile/${userId}`);
         }
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            $('ul.nav > li')
+                .click(function (e) {
+                    $('ul.nav > li')
+                        .removeClass('active');
+                    $(this).addClass('active');
+                });
+        });
     </script>
 </body>
 </html>

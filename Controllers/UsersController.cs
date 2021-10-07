@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using RestSharp;
 using ZADALKHAIR.Data;
 using ZADALKHAIR.Models;
 
@@ -65,6 +66,7 @@ namespace ZADALKHAIR.Controllers
             {
                 Secure = true,
             });
+            
             if (Url.IsLocalUrl(ReturnUrl))
                 return RedirectToAction(nameof(Login));
             return View();
@@ -92,7 +94,7 @@ namespace ZADALKHAIR.Controllers
                     var userPrincipal = new ClaimsPrincipal(new[] { userIdentity });
                     await HttpContext.SignInAsync(userPrincipal);
 
-                    /*var tokenhandler = new JwtSecurityTokenHandler();
+                    var tokenhandler = new JwtSecurityTokenHandler();
                     var tokenkey = Encoding.ASCII.GetBytes("[SECRET USED TO SIGN AND VERIFY JWT TOKENS, IT CAN BE ANY STRING]");
                     var tokendesciptor = new SecurityTokenDescriptor()
                     {
@@ -107,7 +109,7 @@ namespace ZADALKHAIR.Controllers
 
                     };
                     var token = tokenhandler.CreateToken(tokendesciptor);
-                    Response.Cookies.Append("token", token.ToString());*/
+                    Response.Cookies.Append("token", token.ToString());
                     return RedirectToAction("Dashboard", "Admin");
                 }
             }
@@ -161,7 +163,7 @@ namespace ZADALKHAIR.Controllers
         [HttpGet]
         [Authorize]
         [Authorize(Roles = "Admin")]
-        [Route("Admin/profile/{id}")]
+        [Route("Admin/profile/{id?}")]
         public async Task<IActionResult> Edit(int? id)
         {
             /*TempData["user"] = HttpUtility.UrlDecode(Request.Cookies["UserLoginCookie"].ToString());*/
@@ -170,7 +172,7 @@ namespace ZADALKHAIR.Controllers
                 return NotFound();
             }
             var user = await _context.User.FindAsync(id);
-            if (user == null)
+            if (user == null )
             {
                 return NotFound();
             }
