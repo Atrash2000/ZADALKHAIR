@@ -44,14 +44,14 @@ namespace ZADALKHAIR.Controllers
         {
             if (id == null)
             {
-                /*return NotFound();*/
+                return PageNotFound();
             }
 
             var user = await _context.User
                 .FirstOrDefaultAsync(m => m.UserID == id);
             if (user == null)
             {
-                /*return NotFound();*/
+                return PageNotFound();
             }
 
             return PartialView("_UserDetails", user);
@@ -253,6 +253,12 @@ namespace ZADALKHAIR.Controllers
         private async Task<bool> UserLoginExists(string email, string password)
         {
             return await _context.User.AnyAsync(e => e.UserEmail == email && e.UserPassword == password);
+        }
+
+        [HttpGet]
+        public PartialViewResult PageNotFound()
+        {
+            return PartialView("_PageNotFound");
         }
     }
 }
