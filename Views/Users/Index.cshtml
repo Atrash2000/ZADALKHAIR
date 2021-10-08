@@ -1,16 +1,20 @@
 ﻿@model IEnumerable<ZADALKHAIR.Models.User>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
+
+
 <h2 class="text-white ml-3">Employees</h2>
 
+
+<a asp-action="Create" class="text-white btn btn-outline-info">Add New Employee</a>
 <hr />
 
-@if (Model != null && Model.Count() > 0)
-<h2 class="text-white">Employees</h2>
-<hr />
+
+
 @if (Model != null && Model.Count() > 0)
 {
     <div class="user-card-container container">
@@ -34,6 +38,8 @@
     </div>
 }
 
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -41,6 +47,8 @@
         </div>
     </div>
 </div>
+
+
 
 @section Scripts {
     <script>
@@ -51,76 +59,3 @@
         })
     </script>
 }
-
-@*<h1>Index</h1>
-
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserEmail)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserFirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserLastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserPhoneNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.USerCountryCode)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserRoleType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserCreateAt)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserPassword)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-    @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserEmail)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserFirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserLastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserPhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.USerCountryCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserRoleType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserCreateAt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserPassword)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.UserID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.UserID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.UserID">Delete</a>
-                </td>
-            </tr>
-    }
-        </tbody>
-    </table>
-*@
