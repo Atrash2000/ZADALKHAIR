@@ -1,4 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -6,17 +13,6 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using RestSharp;
 using ZADALKHAIR.Data;
 using ZADALKHAIR.Models;
 
@@ -118,9 +114,9 @@ namespace ZADALKHAIR.Controllers
 
         [Route("Admin/AddEmployee")]
         [HttpGet]
-        public PartialViewResult Create()
+        public IActionResult Create()
         {
-            return PartialView("_CreateEmployee");
+            return View();
         }
 
         // POST: Users/Create
@@ -129,7 +125,7 @@ namespace ZADALKHAIR.Controllers
         [HttpPost]
         [Route("Admin/AddEmployee")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserEmail,UserFirstName,UserLastName,UserPhoneNumber,USerCountryCode,UserRoleType,UserCreateAt,UserPassword")] User user)
+        public async Task<IActionResult> Create([Bind("UserEmail,UserFirstName,UserLastName,UserPhoneNumber,USerCountryCode,UserRoleType,UserPassword")] User user)
         {
             if (ModelState.IsValid)
             {

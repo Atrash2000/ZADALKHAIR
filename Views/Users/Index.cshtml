@@ -5,15 +5,11 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-
-
 <h2 class="text-white ml-3">Employees</h2>
 
-<button type="button" data-toggle="modal" class="btn new-employee" data-target="#exampleModalCenter">New Employee</button>
+<a asp-action="Create" asp-controller="Users" class="btn btn-primary ml-3">New Employee</a>
 
 <hr />
-
-
 
 @if (Model != null && Model.Count() > 0)
 {
@@ -38,27 +34,11 @@
     </div>
 }
 
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-        </div>
-    </div>
-</div>
-
-
-
 @section Scripts {
     <script>
         $(function () {
             $('button.details').on('click', function () {
                 $('.modal-content').load(`/Admin/User/Details/injuction/${$(this).data('id')}`);
-            });
-
-            $('button.new-employee').on('click', function () {
-                $('.modal-content').load("/Admin/AddEmployee");
             });
         })
     </script>
