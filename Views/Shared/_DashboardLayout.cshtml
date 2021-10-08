@@ -140,16 +140,16 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
     <script>
         function openUserProfile() {
-            let user = JSON.parse(localStorage.getItem("user"));
+            let user = JSON.parse(decodeToken());
             const userId = user.primarysid;
             window.location.href = window.location.href.replace(window.location.href, `/Admin/profile/${userId}`);
         }
-    </script>
-    <script>
+
         $(document).ready(function () {
 
             $('ul.nav > li')

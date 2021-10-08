@@ -117,10 +117,10 @@ namespace ZADALKHAIR.Controllers
         }
 
         [Route("Admin/AddEmployee")]
-        // GET: Users/Create
-        public IActionResult Create()
+        [HttpGet]
+        public PartialViewResult Create()
         {
-            return View();
+            return PartialView("_CreateEmployee");
         }
 
         // POST: Users/Create
@@ -163,10 +163,9 @@ namespace ZADALKHAIR.Controllers
         [HttpGet]
         [Authorize]
         [Authorize(Roles = "Admin")]
-        [Route("Admin/profile/{id?}")]
+        [Route("Admin/profile/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
-            /*TempData["user"] = HttpUtility.UrlDecode(Request.Cookies["UserLoginCookie"].ToString());*/
             if (id == null)
             {
                 return NotFound();

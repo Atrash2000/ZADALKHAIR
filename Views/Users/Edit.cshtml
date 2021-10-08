@@ -20,26 +20,7 @@
                             <input type="hidden" asp-for="UserID" />
                             <input type="hidden" asp-for="UserPassword" />
                             <input type="hidden" asp-for="UserRoleType" />
-                            @*<div class="row">
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating">Company (disabled)</label>
-                                            <input type="text" class="form-control" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating">Username</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating">Email address</label>
-                                            <input type="email" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>*@
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -65,12 +46,7 @@
                                         <input asp-for="UserPassword" type="password" placeholder="******" class="form-control">
                                     </div>
                                 </div>
-                                @*<div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating">Adress</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>*@
+
                             </div>
                             <label asp-for="UserPhoneNumber" class="control-label"></label>
                             <div class="row">
@@ -306,20 +282,6 @@
                                     </div>
                                 </div>
                             </div>
-                            @*<div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>About Me</label>
-                                            <div class="form-group">
-                                                <label class="bmd-label-floating">
-                                                    Lamborghini Mercy, Your chick
-                                                    she so thirsty, I'm in that two seat Lambo.
-                                                </label>
-                                                <textarea class="form-control" rows="5"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>*@
                             <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
                             <div class="clearfix"></div>
                         </form>
@@ -339,7 +301,6 @@
                         <h5 class="card-description">
                             @Model.UserRoleType
                         </h5>
-                        @*<a href="#pablo" class="btn btn-primary btn-round">Follow</a>*@
                     </div>
                 </div>
             </div>
@@ -351,4 +312,13 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(window).on("load", function () {
+            let user = JSON.parse(decodeToken());
+            const userId = user.primarysid;
+            if (!window.location.pathname.includes(userId)) {
+                window.location.href = window.location.href.replace(window.location.href, `/Admin/profile/${userId}`);
+            }
+        });
+    </script>
 }

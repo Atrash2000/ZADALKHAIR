@@ -6,11 +6,10 @@
 
 <h2 class="text-white ml-3">Employees</h2>
 
+<button type="button" data-toggle="modal" class="btn new-employee" data-target="#exampleModalCenter">New Employee</button>
+
 <hr />
 
-@if (Model != null && Model.Count() > 0)
-<h2 class="text-white">Employees</h2>
-<hr />
 @if (Model != null && Model.Count() > 0)
 {
     <div class="user-card-container container">
@@ -47,6 +46,10 @@
         $(function () {
             $('button.details').on('click', function () {
                 $('.modal-content').load(`/Admin/User/Details/injuction/${$(this).data('id')}`);
+            });
+
+            $('button.new-employee').on('click', function () {
+                $('.modal-content').load("/Admin/AddEmployee");
             });
         })
     </script>
