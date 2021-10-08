@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
 <h1>Create</h1>
@@ -40,6 +41,7 @@
             <div class="form-group">
                 <label asp-for="UserRoleType" class="control-label"></label>
                 <input asp-for="UserRoleType" class="form-control" />
+
                 <span asp-validation-for="UserRoleType" class="text-danger"></span>
             </div>
             <div class="form-group">
