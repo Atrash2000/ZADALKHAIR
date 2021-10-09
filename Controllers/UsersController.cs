@@ -15,16 +15,21 @@ using System.Text;
 using System.Threading.Tasks;
 using ZADALKHAIR.Data;
 using ZADALKHAIR.Models;
+using System.IO;
+using System.Web;
+using Microsoft.AspNetCore.Hosting;
 
 namespace ZADALKHAIR.Controllers
 {
     public class UsersController : Controller
     {
         private readonly ZADALKHAIRContext _context;
+        private readonly IWebHostEnvironment webhostenvironment;
 
-        public UsersController(ZADALKHAIRContext context)
+        public UsersController(ZADALKHAIRContext context, IWebHostEnvironment webhostenvironment)
         {
             _context = context;
+            this.webhostenvironment = webhostenvironment;
         }
         [Route("Admin/ViewEmployee")]
         // GET: Users
@@ -55,14 +60,14 @@ namespace ZADALKHAIR.Controllers
 
         [HttpGet]
         [Route("Login")]
-        
+
         public IActionResult Login(string? ReturnUrl)
         {
             Response.Cookies.Delete("UserLoginCookie", new CookieOptions()
             {
                 Secure = true,
             });
-            
+
             if (Url.IsLocalUrl(ReturnUrl))
                 return RedirectToAction(nameof(Login));
             return View();
@@ -104,8 +109,8 @@ namespace ZADALKHAIR.Controllers
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenkey), SecurityAlgorithms.HmacSha256Signature)
 
                     };
-                    var token = tokenhandler.CreateToken(tokendesciptor);
-                    Response.Cookies.Append("token", token.ToString());
+                    var token = tokenhandler.CreateEncodedJwt(tokendesciptor);
+                    TempData["token"] = token.ToString();
                     return RedirectToAction("Dashboard", "Admin");
                 }
             }
@@ -125,8 +130,11 @@ namespace ZADALKHAIR.Controllers
         [HttpPost]
         [Route("Admin/AddEmployee")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserEmail,UserFirstName,UserLastName,UserPhoneNumber,USerCountryCode,UserRoleType,UserPassword")] User user)
+        public async Task<IActionResult> Create([Bind("UserEmail,UserFirstName,UserLastName,UserPhoneNumber,USerCountryCode,UserRoleType,UserPassword,ProfilePic,UserProfilePic,UserCreateAt")] User user)
         {
+            user.UserCreateAt = DateTime.Now;
+            string profilePic = await UploadFile(user.ProfilePic);
+            user.UserProfilePic = profilePic;
             if (ModelState.IsValid)
             {
                 user.UserPassword = ComputeStringToSha256Hash(user.UserPassword);
@@ -135,6 +143,24 @@ namespace ZADALKHAIR.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
+        }
+
+        public async Task<string> UploadFile(IFormFile profilePic)
+        {
+            string fileName = null;
+
+            if (profilePic != null)
+            {
+                string uploadDir = Path.Combine(webhostenvironment.WebRootPath, "images/profilePic");
+                /*fileName = Guid.NewGuid().ToString() + "-" + profilePic.FileName;*/
+                fileName = profilePic.FileName;
+                string filePath = Path.Combine(uploadDir, fileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    profilePic.CopyTo(fileStream);
+                }
+            }
+            return fileName;
         }
 
         private string ComputeStringToSha256Hash(string userPassword)
@@ -167,11 +193,11 @@ namespace ZADALKHAIR.Controllers
                 return NotFound();
             }
             var user = await _context.User.FindAsync(id);
-            if (user == null )
+            if (user == null)
             {
                 return NotFound();
             }
-            
+
             return View(user);
         }
 

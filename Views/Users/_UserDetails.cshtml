@@ -1,18 +1,16 @@
 ﻿@model ZADALKHAIR.Models.User
-<head>
-    
-</head>
+
 <div class="modal-header">
-    <h3 style="color: black !important;" class="modal-title" id="exampleModalLongTitle">Emmployee Info</h3>
+    <h3 class="modal-title text-body" id="exampleModalLongTitle">Emmployee Info</h3>
     <button type="button" class="close" data-dismiss="modal"  aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
     <ul>
-        <li style="color: black !important;"><i style="color: black !important;" class="fas fa-envelope mr-2"></i> @Model.UserEmail</li>
-        <li style="color: black !important;" class="my-4"><i style="color: black !important;" class="fas fa-phone-alt mr-2"></i> (@Model.USerCountryCode) @Model.UserPhoneNumber</li>
-        <li style="color: black !important;"><i style="color: black !important;" class="fas fa-clock mr-2"></i> @Model.UserCreateAt</li>
+        <li class="text-body"><i style="color: black !important;" class="fas fa-envelope mr-2"></i> @Model.UserEmail</li>
+        <li class="my-4 text-body"><i style="color: black !important;" class="fas fa-phone-alt mr-2"></i> (@Model.USerCountryCode) @Model.UserPhoneNumber</li>
+        <li class="text-body"><i style="color: black !important;" class="fas fa-clock mr-2"></i> @Model.UserCreateAt</li>
     </ul>
 </div>
 <div class="modal-footer">

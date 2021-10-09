@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -49,6 +51,12 @@ namespace ZADALKHAIR.Models
         [Display(Name = "Password")]
         public string UserPassword { get; set; }
 
+        public string UserProfilePic { get; set; }
+
+        [Required]
+        [Display(Name = "Profile Picture")]
+        [NotMapped]
+        public IFormFile ProfilePic { get; set; }
 
     }
     public class Login

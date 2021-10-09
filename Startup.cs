@@ -11,6 +11,9 @@ using System.Security.Claims;
 using ZADALKHAIR.CustomHandler;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ZADALKHAIR
 {
@@ -29,6 +32,23 @@ namespace ZADALKHAIR
             services.AddDbContext<ZADALKHAIRContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ZADALKHAIRContext")));
 
+            /*services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(y =>
+            {
+                y.RequireHttpsMetadata = false;
+                y.SaveToken = true;
+                y.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("[SECRET USED TO SIGN AND VERIFY JWT TOKENS, IT CAN BE ANY STRING]")),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+
+                };
+            });*/
 
             services.AddAuthentication("CookieAuthentication")
                  .AddCookie("CookieAuthentication", config =>

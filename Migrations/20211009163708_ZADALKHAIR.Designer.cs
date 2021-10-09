@@ -10,7 +10,7 @@ using ZADALKHAIR.Data;
 namespace ZADALKHAIR.Migrations
 {
     [DbContext(typeof(ZADALKHAIRContext))]
-    [Migration("20211004181931_ZADALKHAIR")]
+    [Migration("20211009163708_ZADALKHAIR")]
     partial class ZADALKHAIR
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -187,6 +187,10 @@ namespace ZADALKHAIR.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserPhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserProfilePic")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

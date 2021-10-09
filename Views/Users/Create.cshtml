@@ -7,15 +7,16 @@
 
 <div class="content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header card-header-primary">
-                        <h4 class="card-title">Add Employee</h4>
-                        <p class="card-category">Complete his profile</p>
-                    </div>
-                    <div class="card-body">
-                        <form>
+        <div>
+            <form asp-action="Create" class="row" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title">Add Employee</h4>
+                            <p class="card-category">Complete his profile</p>
+                        </div>
+                        <div class="card-body">
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -62,7 +63,7 @@
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <select name="ContactCounrty" asp-for="USerCountryCode" class="form-control">
+                                                <select name="USerCountryCode" asp-for="USerCountryCode" class="form-control">
                                                     <option data-countryCode="GB" value="44" Selected>Norway (+47)</option>
                                                     <option data-countryCode="US" value="1">UK (+44)</option>
                                                     <optgroup label="Other countries" class="text-black-50">
@@ -300,10 +301,10 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                            <select asp-for="UserRoleType" name="UserRoleType" class="form-control px-2">
-                                                <option value="Admin">Admin</option>
-                                                <option value="Employee">Employee</option>
-                                            </select>
+                                        <select asp-for="UserRoleType" name="UserRoleType" class="form-control px-2">
+                                            <option value="Admin">Admin</option>
+                                            <option value="Employee">Employee</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -311,31 +312,67 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label asp-for="UserPhoneNumber" class="bmd-label-floating"></label>
-                                        <input asp-for="UserPhoneNumber" class="form-control" />
-                                        <span asp-validation-for="UserPhoneNumber" class="text-danger"></span>
+                                        <label asp-for="UserPassword" class="bmd-label-floating"></label>
+                                        <input asp-for="UserPassword" class="form-control" />
+                                        <span asp-validation-for="UserPassword" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
 
                             <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
                             <div class="clearfix"></div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-profile">
-                    <div class="card-avatar">
-                        <a href="#pablo">
-                            <img class="img" src="~/Admin/assets/img/faces/marc.jpg" />
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
+                <div class="col-md-4">
+                    <div class="card card-profile">
+                        <div class="card-body">
+                            <label class="text-white h3" asp-for="ProfilePic"></label>
+                            <div class="table-container">
+                                <div class="table-cell">
+                                    <div id="profile">
+                                        <div class="dashes"></div>
+                                        <label>Click to browse</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="file" id="mediaFile" asp-for="ProfilePic" />
+                            <span asp-validation-for="ProfilePic" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
+
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        // ----- On render -----
+        $(function () {
+
+            $('#profile').addClass('dragging').removeClass('dragging');
+        });
+
+        $('#profile').on('click', function (e) {
+            $('#mediaFile').click();
+        });
+        $('#mediaFile').change(function (e) {
+
+            var input = e.target;
+            if (input.files && input.files[0]) {
+                var file = input.files[0];
+
+                var reader = new FileReader();
+
+                reader.readAsDataURL(file);
+                reader.onload = function (e) {
+                    $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+                }
+            }
+        })
+    </script>
+}
