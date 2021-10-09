@@ -18,7 +18,6 @@ namespace ZADALKHAIR.Controllers
         {
             _context = context;
         }
-        [Route("Services")]
         // GET: Services
         public async Task<IActionResult> Index()
         {
@@ -42,7 +41,7 @@ namespace ZADALKHAIR.Controllers
 
             return View(service);
         }
-        [Route("Add-Service")]
+   
         // GET: Services/Create
         public IActionResult Create()
         {
@@ -53,7 +52,7 @@ namespace ZADALKHAIR.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Route("Add-Service")]
+       
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ServiceID,ServiceTitle,ServiceDiscription,ServiceStartingPrice,ServiceImage")] Service service)
         {
