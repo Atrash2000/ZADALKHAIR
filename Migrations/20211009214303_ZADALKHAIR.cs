@@ -59,8 +59,8 @@ namespace ZADALKHAIR.Migrations
                     ServiceTitle = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     ServiceDiscription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ServiceStartingPrice = table.Column<double>(type: "float", nullable: false),
-                    ServiceImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ServiceApproved = table.Column<bool>(type: "bit", nullable: false),
+                    features = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ServiceImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

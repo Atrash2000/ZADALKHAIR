@@ -2,57 +2,105 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h1>Create</h1>
+<div class="content">
+    <div class="container-fluid">
+        <div>
+            <form asp-action="Create" class="row" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title">Add New Serivce</h4>
+                            <p class="card-category">Complete the Serivce Requaerment</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ServiceTitle" class="bmd-label-floating"></label>
+                                        <input asp-for="ServiceTitle" class="form-control">
+                                        <span asp-validation-for="ServiceTitle" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="features" class="bmd-label-floating"></label>
+                                        <input asp-for="features" class="form-control">
+                                        <span asp-validation-for="features" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ServiceDiscription" class="bmd-label-floating"></label>
+                                        <input asp-for="ServiceDiscription" class="form-control">
+                                        <span asp-validation-for="ServiceDiscription" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ServiceStartingPrice" class="bmd-label-floating"></label>
+                                        <input asp-for="ServiceStartingPrice" class="form-control">
+                                        <span asp-validation-for="ServiceStartingPrice" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
 
-<h4>Service</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ServiceTitle" class="control-label"></label>
-                <input asp-for="ServiceTitle" class="form-control" />
-                <span asp-validation-for="ServiceTitle" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ServiceDiscription" class="control-label"></label>
-                <input asp-for="ServiceDiscription" class="form-control" />
-                <span asp-validation-for="ServiceDiscription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ServiceStartingPrice" class="control-label"></label>
-                <input asp-for="ServiceStartingPrice" class="form-control" />
-                <span asp-validation-for="ServiceStartingPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ServiceImage" class="control-label"></label>
-                <input asp-for="ServiceImage" class="form-control" />
-                <span asp-validation-for="ServiceImage" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="ServiceApproved" /> @Html.DisplayNameFor(model => model.ServiceApproved)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                            <button type="submit" class="btn btn-primary pull-right">Add Service</button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-profile">
+                        <div class="card-body">
+                            <label class="text-white h3" asp-for="ServicePic"></label>
+                            <div class="table-container">
+                                <div class="table-cell">
+                                    <div id="profile">
+                                        <div class="dashes"></div>
+                                        <label>Click to browse</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="file" id="mediaFile" asp-for="ServicePic" />
+                            <span asp-validation-for="ServicePic" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        // ----- On render -----
+        $(function () {
+
+            $('#profile').addClass('dragging').removeClass('dragging');
+        });
+
+        $('#profile').on('click', function (e) {
+            $('#mediaFile').click();
+        });
+        $('#mediaFile').change(function (e) {
+
+            var input = e.target;
+            if (input.files && input.files[0]) {
+                var file = input.files[0];
+
+                var reader = new FileReader();
+
+                reader.readAsDataURL(file);
+                reader.onload = function (e) {
+                    $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+                }
+            }
+        })
+    </script>
 }
