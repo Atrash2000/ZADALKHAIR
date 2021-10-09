@@ -17,5 +17,12 @@ namespace ZADALKHAIR.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        [Route("emptyData")]
+        public PartialViewResult NoDataFound()
+        {
+            return PartialView("NoData");
+        }
     }
 }

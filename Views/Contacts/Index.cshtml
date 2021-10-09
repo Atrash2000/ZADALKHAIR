@@ -5,36 +5,36 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h2 class="text-white">Contact Us</h2>
-
-@if (Model != null && Model.Count > 0)
+@if (Model != null && Model.Count() > 0)
 {
+    <h2 class="text-white">Contact Us</h2>
+
     <table class="table text-center">
         <thead>
             <tr>
                 <th>
                     <label asp-for="@Model??.ContactID"></label>
-            
+
                 </th>
                 <th>
                     <label asp-for="@Model??.ContactName"></label>
-              
+
                 </th>
                 <th>
                     <label asp-for="@Model??.ContactPhoneNumber"></label>
-                
+
                 </th>
                 <th>
                     <label asp-for="@Model??.ContactSatuts"></label>
-             
+
                 </th>
                 <th>
                     <label asp-for="@Model??.CreatedAt"></label>
-                  
+
                 </th>
                 <th>
                     <label asp-for="@Model??.SatutsUpdate"></label>
-    
+
                 </th>
                 <th></th>
             </tr>
@@ -78,22 +78,32 @@
             }
         </tbody>
     </table>
-}
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            </div>
         </div>
     </div>
-</div>
+}
+else
+{
+    <div class="empty-state">
+
+    </div>
+}
 
 @section Scripts {
-<script>
-    $(function () {
-        $('button.details').on('click', function () {
-            $('.modal-content').load(`/Admin/Contact/Details/injuction/${$(this).data('id')}`);
-        });
-    })
-</script>
+    <script>
+        $(function () {
+            $(window).on("load", function () {
+                $(".empty-state").load("/Admin/emptyData");
+            });
+
+            $('button.details').on('click', function () {
+                $('.modal-content').load(`/Admin/Contact/Details/injuction/${$(this).data('id')}`);
+            });
+        })
+    </script>
 }

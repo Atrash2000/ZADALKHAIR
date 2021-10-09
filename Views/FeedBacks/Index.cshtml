@@ -5,94 +5,105 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h1 class="text-white">Feedback</h1>
+@if (Model != null && Model.Count() > 0)
+{
+    <h1 class="text-white">Feedback</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FeedBackID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.FeedBackSatuts)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SatutsUpdate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sex)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table class="table">
+        <thead>
             <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FeedBackID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
 
-                <td>
-                    @item.FeedBackID
-                </td>
-                <td>
-                    @item.Name
-                </td>
-                
-                <td>
-                    (@item.CounrtyCode) @item.PhoneNumber
-                </td>
-                <td>
-                    @item.FeedBackSatuts
-                </td>
-                <td>
-                    @item.CreatedAt.ToString().Split(" ")[0]
-                </td>
-                <td>
-                    @item.SatutsUpdate.ToString().Split(" ")[0]
-                </td>
-                <td>
-                    @item.Rate
-                </td>
-                <td>
-                    @item.Sex
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.FeedBackID">Edit</a> |
-                    <button type="button" data-id="@item.FeedBackID" data-toggle="modal" class="btn details" data-target="#exampleModalCenter">Details</button> |
-                    <a asp-action="Delete" asp-route-id="@item.FeedBackID">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.FeedBackSatuts)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SatutsUpdate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sex)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+                    <td>
+                        @item.FeedBackID
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+
+                    <td>
+                        (@item.CounrtyCode) @item.PhoneNumber
+                    </td>
+                    <td>
+                        @item.FeedBackSatuts
+                    </td>
+                    <td>
+                        @item.CreatedAt.ToString().Split(" ")[0]
+                    </td>
+                    <td>
+                        @item.SatutsUpdate.ToString().Split(" ")[0]
+                    </td>
+                    <td>
+                        @item.Rate
+                    </td>
+                    <td>
+                        @item.Sex
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.FeedBackID">Edit</a> |
+                        <button type="button" data-id="@item.FeedBackID" data-toggle="modal" class="btn details" data-target="#exampleModalCenter">Details</button> |
+                        <a asp-action="Delete" asp-route-id="@item.FeedBackID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            </div>
         </div>
     </div>
-</div>
+}
+else
+{
+    <div class="empty-state"></div>
+}
 
 @section Scripts {
     <script>
-    $(function () {
-        $('button.details').on('click', function () {
-            $('.modal-content').load(`/Admin/Feedback/Details/injuction/${$(this).data('id')}`);
-        });
-    })
+        $(function () {
+            $(window).on("load", function () {
+                $(".empty-state").load("/Admin/emptyData");
+            });
+
+            $('button.details').on('click', function () {
+                $('.modal-content').load(`/Admin/Feedback/Details/injuction/${$(this).data('id')}`);
+            });
+        })
     </script>
 }
