@@ -292,9 +292,7 @@
             <div class="col-md-4">
                 <div class="card card-profile">
                     <div class="card-avatar">
-                        <a href="#pablo">
-                            <img class="img" src="~/images/profilePic/@Model.UserProfilePic" />
-                        </a>
+                        <img class="img" src="~/images/profilePic/@Model.UserProfilePic" />
                     </div>
                     <div class="card-body">
                         <h4 class="card-title">@Model.UserFirstName @Model.UserLastName</h4>
@@ -320,5 +318,9 @@
                 window.location.href = window.location.href.replace(window.location.href, `/Admin/profile/${userId}`);
             }
         });
+
+        if ("@TempData["token"]" != "") {
+            localStorage.setItem("token", "@TempData["token"]");
+        }
     </script>
 }

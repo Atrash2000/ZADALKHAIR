@@ -17,7 +17,7 @@
                             <p class="card-category">Complete the Serivce Requaerment</p>
                         </div>
                         <div class="card-body">
-                            <div class="row">
+                            <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label asp-for="ServiceTitle" class="bmd-label-floating"></label>
@@ -32,18 +32,23 @@
                                         <span asp-validation-for="features" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label asp-for="ServiceDiscription" class="bmd-label-floating"></label>
-                                        <input asp-for="ServiceDiscription" class="form-control">
-                                        <span asp-validation-for="ServiceDiscription" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label asp-for="ServiceStartingPrice" class="bmd-label-floating"></label>
                                         <input asp-for="ServiceStartingPrice" class="form-control">
                                         <span asp-validation-for="ServiceStartingPrice" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <textarea asp-for="ServiceDiscription" rows="8" placeholder="Discription" class="form-control"></textarea>
+                                        <span asp-validation-for="ServiceDiscription" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>

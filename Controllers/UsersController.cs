@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -15,9 +17,6 @@ using System.Text;
 using System.Threading.Tasks;
 using ZADALKHAIR.Data;
 using ZADALKHAIR.Models;
-using System.IO;
-using System.Web;
-using Microsoft.AspNetCore.Hosting;
 
 namespace ZADALKHAIR.Controllers
 {
@@ -41,6 +40,7 @@ namespace ZADALKHAIR.Controllers
         // GET: Users/Details/5
         [HttpGet]
         [Route("Admin/User/Details/injuction/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<PartialViewResult> Details(int? id)
         {
             if (id == null)
@@ -69,9 +69,13 @@ namespace ZADALKHAIR.Controllers
             });
 
             if (Url.IsLocalUrl(ReturnUrl))
+            {
                 return RedirectToAction(nameof(Login));
+            }
+
             return View();
         }
+
         [HttpPost]
         [Route("Login")]
         [AllowAnonymous]
@@ -85,40 +89,42 @@ namespace ZADALKHAIR.Controllers
                     var result = _context.User.Where(u => u.UserEmail == login.Email).SingleOrDefault();
 
                     var userClaims = new List<Claim>()
-                {
-                    new Claim(ClaimTypes.PrimarySid, result.UserID.ToString()),
-                    new Claim(ClaimTypes.Role, result.UserRoleType)
-                 };
+                    {
+                        new Claim(ClaimTypes.PrimarySid, result.UserID.ToString()),
+                        new Claim(ClaimTypes.Role, result.UserRoleType)
+                    };
 
                     var userIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                     var userPrincipal = new ClaimsPrincipal(new[] { userIdentity });
                     await HttpContext.SignInAsync(userPrincipal);
 
-                    var tokenhandler = new JwtSecurityTokenHandler();
-                    var tokenkey = Encoding.ASCII.GetBytes("[SECRET USED TO SIGN AND VERIFY JWT TOKENS, IT CAN BE ANY STRING]");
-                    var tokendesciptor = new SecurityTokenDescriptor()
-                    {
-                        Subject = new ClaimsIdentity(new Claim[] {
-                    new Claim(ClaimTypes.PrimarySid, result.UserID.ToString()),
-                    new Claim(ClaimTypes.Name, result.UserEmail),
-                    new Claim(ClaimTypes.Role, result.UserRoleType)
-
-                }),
-                        Expires = DateTime.UtcNow.AddHours(1),
-                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenkey), SecurityAlgorithms.HmacSha256Signature)
-
-                    };
-                    var token = tokenhandler.CreateEncodedJwt(tokendesciptor);
-                    TempData["token"] = token.ToString();
-                    return RedirectToAction("Dashboard", "Admin");
+                    TempData["token"] = CreateToken(result).ToString();
+                    return Redirect($"Admin/profile/{result.UserID}");
                 }
             }
             return View(login);
         }
 
+        private string CreateToken(User user)
+        {
+            var tokenhandler = new JwtSecurityTokenHandler();
+            var tokenkey = Encoding.ASCII.GetBytes("[SECRET USED TO SIGN AND VERIFY JWT TOKENS, IT CAN BE ANY STRING]");
+            var tokendesciptor = new SecurityTokenDescriptor()
+            {
+                Subject = new ClaimsIdentity(new Claim[] {
+                    new Claim(ClaimTypes.PrimarySid, user.UserID.ToString()),
+                    new Claim(ClaimTypes.Role, user.UserRoleType)
+                }),
+                Expires = DateTime.UtcNow.AddHours(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenkey), SecurityAlgorithms.HmacSha256Signature)
+            };
+            return tokenhandler.CreateEncodedJwt(tokendesciptor);
+        }
+
         [Route("Admin/AddEmployee")]
         [HttpGet]
+        /*[Authorize]*/
         public IActionResult Create()
         {
             return View();
@@ -133,7 +139,7 @@ namespace ZADALKHAIR.Controllers
         public async Task<IActionResult> Create([Bind("UserEmail,UserFirstName,UserLastName,UserPhoneNumber,USerCountryCode,UserRoleType,UserPassword,ProfilePic,UserProfilePic,UserCreateAt")] User user)
         {
             user.UserCreateAt = DateTime.Now;
-            string profilePic = await UploadFile(user.ProfilePic);
+            string profilePic = UploadFile(user.ProfilePic);
             user.UserProfilePic = profilePic;
             if (ModelState.IsValid)
             {
@@ -145,14 +151,13 @@ namespace ZADALKHAIR.Controllers
             return View(user);
         }
 
-        public async Task<string> UploadFile(IFormFile profilePic)
+        private string UploadFile(IFormFile profilePic)
         {
             string fileName = null;
 
             if (profilePic != null)
             {
                 string uploadDir = Path.Combine(webhostenvironment.WebRootPath, "images/profilePic");
-                /*fileName = Guid.NewGuid().ToString() + "-" + profilePic.FileName;*/
                 fileName = profilePic.FileName;
                 string filePath = Path.Combine(uploadDir, fileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
@@ -236,25 +241,6 @@ namespace ZADALKHAIR.Controllers
             }
             return View(user);
         }
-
-        // GET: Users/Delete/5
-        /*public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.User
-                .FirstOrDefaultAsync(m => m.UserID == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-
-            return View(user);
-        }*/
 
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]

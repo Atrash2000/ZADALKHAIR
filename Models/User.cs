@@ -49,6 +49,9 @@ namespace ZADALKHAIR.Models
 
         [Required]
         [Display(Name = "Password")]
+        [DataType(DataType.Password)]
+        [MinLength(8)]
+        [MaxLength(150)]
         public string UserPassword { get; set; }
 
         public string UserProfilePic { get; set; }
