@@ -17,7 +17,7 @@
 <div class="modal-footer">
     <form asp-action="Delete" method="post">
         <input type="hidden" asp-for="@Model.UserID"/>
-        <input type="submit" class="btn btn-danger delete-btn" value="Delete">
+        <input type="submit" data-RoleType="@Model.UserRoleType" class="btn btn-danger delete-btn" value="Delete">
     </form>
     <button type="button" class="btn" data-dismiss="modal">Close</button>
 </div>
@@ -25,10 +25,11 @@
 <script>
     $("input.delete-btn").hover(function () {
         if ('@TempData["AdminCount"]' == 1) {
-            $(this).attr({
+            $("input[data-RoleType='Admin']").attr({
                 "data-toggle": "tooltip",
                 "data-placement": "left",
                 style: "cursor: not-allowed",
+                disabled: true,
                 title: "Tooltip on left",
             });
         }
