@@ -63,12 +63,6 @@
                         <a href="#" class="text-white">Our Services</a>
                     </li>
                     <li class="mb-3">
-                        <a href="#" class="text-white">Blog</a>
-                    </li>
-                    @*<li class="mb-3">
-                            <a href="#" class="text-white">Career</a>
-                        </li>*@
-                    <li class="mb-3">
                         <a asp-action="Create" asp-controller="Contacts" class="text-white">Contact Us</a>
                     </li>
                 </ul>
@@ -100,15 +94,6 @@
 
 
     <footer class="text-muted mt-5">
-        @*<div class="subscribe-area py-5 text-white" style="background-color: #282828;">
-                <h3 class="mb-4 text-center">Newsletter</h3>
-                <p class="text-center">Subscribe to our newsletter and get tuned with our latest updates</p>
-                <div class="d-flex justify-content-center">
-                    <input type="text" class="subscribe-search py-2 position-relative pl-3" placeholder="Enter your mail" />
-                    <button class="btn btn-subscribe rounded-0 px-3 text-white position-relative">SUBSCRIBE</button>
-                </div>
-            </div>*@
-
         <div class="footer-wrapper">
 
             <div class="footer-area footer-padding">
@@ -218,10 +203,7 @@
                                 <div class="footer-copy-right text-center">
                                     <p>
                                         Copyright &copy;
-                                        <script>document.write(new Date().getFullYear());</script> All rights reserved @*|
-                                            This template is made with <i class="fa fa-heart color-danger"
-                                                                          aria-hidden="true"></i> by <a href="https://colorlib.com/" target="_blank"
-                                                                                                        rel="nofollow noopener">Colorlib</a>*@
+                                        <script>document.write(new Date().getFullYear());</script> All rights reserved
                                     </p>
                                 </div>
                             </div>
@@ -240,7 +222,3 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
-
-@*<div class="container">
-        &copy; 2021 - Zad - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-    </div>*@

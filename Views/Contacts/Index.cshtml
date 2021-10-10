@@ -69,12 +69,17 @@
                         }
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.ContactID">Edit</a> |
-                        <button type="button" data-id="@item.ContactID" data-toggle="modal" class="btn details" data-target="#exampleModalCenter">Details</button> |
-                        <a asp-action="Delete" asp-route-id="@item.ContactID">Delete</a>
+                        <button type="button" data-id="@item.ContactID" data-toggle="modal" class="btn btn-primary details" data-target="#exampleModalCenter">Details</button>
+                        @if (!item.ContactSatuts)
+                        {
+                            <a class="btn btn-success">Accept</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-danger">Make As Read</a>
+                        }
                     </td>
                 </tr>
-
             }
         </tbody>
     </table>

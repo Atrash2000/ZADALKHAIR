@@ -37,6 +37,7 @@
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
+                @*<div class="modal-body px-0 mx-0"></div>*@
             </div>
         </div>
     </div>
@@ -45,6 +46,8 @@ else
 {
     <div class="empty-state"></div>
 }
+
+<h3>@TempData["Status"]</h3>
 
 @section Scripts {
     <script>

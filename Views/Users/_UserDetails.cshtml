@@ -2,7 +2,7 @@
 
 <div class="modal-header">
     <h3 class="modal-title text-body" id="exampleModalLongTitle">Emmployee Info</h3>
-    <button type="button" class="close" data-dismiss="modal"  aria-label="Close">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
@@ -13,6 +13,26 @@
         <li class="text-body"><i style="color: black !important;" class="fas fa-clock mr-2"></i> @Model.UserCreateAt</li>
     </ul>
 </div>
+
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="@Model.UserID"/>
+        <input type="submit" class="btn btn-danger delete-btn" value="Delete">
+    </form>
+    <button type="button" class="btn" data-dismiss="modal">Close</button>
 </div>
+
+<script>
+    $("input.delete-btn").hover(function () {
+        if ('@TempData["AdminCount"]' == 1) {
+            $(this).attr({
+                "data-toggle": "tooltip",
+                "data-placement": "left",
+                style: "cursor: not-allowed",
+                title: "Tooltip on left",
+            });
+        }
+    });
+</script>
+
+@*style="pointer-events: none"*@

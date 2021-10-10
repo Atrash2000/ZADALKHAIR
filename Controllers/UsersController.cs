@@ -54,7 +54,7 @@ namespace ZADALKHAIR.Controllers
             {
                 return PageNotFound();
             }
-
+            TempData["AdminCount"] = _context.User.Where(u => u.UserRoleType == "Admin").Count();
             return PartialView("_UserDetails", user);
         }
 
@@ -238,7 +238,7 @@ namespace ZADALKHAIR.Controllers
         }
 
         // GET: Users/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        /*public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -254,16 +254,20 @@ namespace ZADALKHAIR.Controllers
 
 
             return View(user);
-        }
+        }*/
 
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(User user)
         {
-            var user = await _context.User.FindAsync(id);
-            _context.User.Remove(user);
-            await _context.SaveChangesAsync();
+            if (_context.User.Count() > 1)
+            {
+                var empInfo = await _context.User.FindAsync(user.UserID);
+                _context.User.Remove(empInfo);
+                await _context.SaveChangesAsync();
+                /*TempData["Status"] = _context.SaveChangesAsync().IsFaulted;*/
+            }
             return RedirectToAction(nameof(Index));
         }
 
