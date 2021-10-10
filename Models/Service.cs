@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,12 +28,15 @@ namespace ZADALKHAIR.Models
         public double ServiceStartingPrice { get; set; }
 
         [Required]
-        [Display(Name = "Service Image")]
+        [Display(Name = "Features")]
+        public string features { get; set; }
         public string ServiceImage { get; set; }
 
-        [Display(Name = "Approved")]
-        public bool ServiceApproved { get; set; } = false;
-
         public DateTime CreatedAt { get; set; }
+
+        [Required]
+        [Display(Name = "Service Picture")]
+        [NotMapped]
+        public IFormFile ServicePic { get; set; }
     }
 }

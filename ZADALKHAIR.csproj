@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\images\servicePic\" />
     <Folder Include="wwwroot\images\profilePic\" />
   </ItemGroup>
 

@@ -10,7 +10,7 @@ using ZADALKHAIR.Data;
 namespace ZADALKHAIR.Migrations
 {
     [DbContext(typeof(ZADALKHAIRContext))]
-    [Migration("20211009184515_ZADALKHAIR")]
+    [Migration("20211009214303_ZADALKHAIR")]
     partial class ZADALKHAIR
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,15 +130,11 @@ namespace ZADALKHAIR.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("ServiceApproved")
-                        .HasColumnType("bit");
-
                     b.Property<string>("ServiceDiscription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ServiceImage")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("ServiceStartingPrice")
@@ -148,6 +144,10 @@ namespace ZADALKHAIR.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("features")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ServiceID");
 

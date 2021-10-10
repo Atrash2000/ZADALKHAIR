@@ -25,9 +25,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.ServiceImage)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.ServiceApproved)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.CreatedAt)
             </th>
@@ -49,9 +49,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ServiceImage)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ServiceApproved)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedAt)
             </td>

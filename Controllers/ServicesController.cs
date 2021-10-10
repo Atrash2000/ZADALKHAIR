@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ZADALKHAIR.Data;
 using ZADALKHAIR.Models;
@@ -13,10 +14,11 @@ namespace ZADALKHAIR.Controllers
     public class ServicesController : Controller
     {
         private readonly ZADALKHAIRContext _context;
-
-        public ServicesController(ZADALKHAIRContext context)
+        private readonly IWebHostEnvironment webhostenvironment;
+        public ServicesController(ZADALKHAIRContext context, IWebHostEnvironment webhostenvironment)
         {
             _context = context;
+            this.webhostenvironment = webhostenvironment;
         }
         // GET: Services
         public async Task<IActionResult> Index()
@@ -54,17 +56,21 @@ namespace ZADALKHAIR.Controllers
         [HttpPost]
        
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ServiceID,ServiceTitle,ServiceDiscription,ServiceStartingPrice,ServiceImage")] Service service)
+        public async Task<IActionResult> Create([Bind("ServiceID,ServiceTitle,ServiceDiscription,features,ServiceStartingPrice,ServicePic")] Service service)
         {
             if (ModelState.IsValid)
             {
                 service.CreatedAt = DateTime.Now;
+                string profilePic = await UploadFile(service.ServicePic);
+                service.ServiceImage = profilePic;
                 _context.Add(service);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(service);
         }
+
+       
 
         // GET: Services/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -82,12 +88,30 @@ namespace ZADALKHAIR.Controllers
             return View(service);
         }
 
+        public async Task<string> UploadFile(IFormFile profilePic)
+        {
+            string fileName = null;
+
+            if (profilePic != null)
+            {
+                string uploadDir = Path.Combine(webhostenvironment.WebRootPath, "images/servicePic");
+                /*fileName = Guid.NewGuid().ToString() + "-" + profilePic.FileName;*/
+                fileName = profilePic.FileName;
+                string filePath = Path.Combine(uploadDir, fileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    profilePic.CopyTo(fileStream);
+                }
+            }
+            return fileName;
+        }
+
         // POST: Services/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ServiceID,ServiceTitle,ServiceDiscription,ServiceStartingPrice,ServiceImage,ServiceApproved")] Service service)
+        public async Task<IActionResult> Edit(int id, [Bind("ServiceID,ServiceTitle,ServiceDiscription,ServiceStartingPrice,ServiceImage")] Service service)
         {
             if (id != service.ServiceID)
             {
