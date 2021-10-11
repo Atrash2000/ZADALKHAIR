@@ -41,7 +41,12 @@ namespace ZADALKHAIR.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
+        [Route("Service List")]
+        [HttpGet]
+        public async Task<IActionResult> ServiceView()
+        {
+            return View(await _context.Service.ToListAsync());
+        }
         public IActionResult AboutUs()
         {
             return View();

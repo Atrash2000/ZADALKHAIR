@@ -1,1 +1,28 @@
-﻿
+﻿@model ZADALKHAIR.Models.Service
+
+@{ ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml"; }
+<div class="top">
+    <img style="vertical-align: middle; width: 300px; height: 300px; border-radius: 10%; " class="img" src="~/images/servicePic/@Model.ServiceImage" />
+    <div>
+        <p class="form-label mt-4" style="width: 100%; font-size: x-large; color: white; padding-left: 10%; padding-top: 25px">1. Title</p>
+        <p readonly style="background-color: transparent; text-decoration: none; padding-left: 15%; border: none; color: white;">@Model.ServiceTitle</p>
+    </div>
+    <div>
+        <p class="form-label mt-4" style="width: 100%; font-size: x-large; color: white; padding-left: 10%; padding-top: 25px">2. Features</p>
+        <p readonly style="background-color: transparent; text-decoration: none; padding-left: 15%; border: none; color: white;">@Model.features</p>
+    </div>
+    <div>
+        <p class="form-label mt-4" style="width: 100%; font-size: x-large; color: white; padding-left: 10%; padding-top: 25px">3. Discription</p>
+        <p readonly style="background-color: transparent; text-decoration: none; padding-left: 15%; border: none; color: white;">@Model.ServiceDiscription</p>
+    </div>
+    <div>
+        <p class="form-label mt-4" style="width: 100%; font-size: x-large; color: white; padding-left: 10%; padding-top: 25px">4. Starting Price</p>
+        <p readonly style="background-color: transparent; text-decoration: none; padding-left: 15%; border: none; color: white;">@Model.ServiceStartingPrice.ToString("c")</p>
+    </div> 
+
+    <a asp-action="Edit" asp-route-id="@Model.ServiceID" class="btn btn-warning">Edit Service</a> |
+    <a asp-action="Delete" asp-route-id="@Model.ServiceID" class="btn btn-danger">Delete Service</a> | 
+    <a asp-action="Index" class="btn btn-info">Return to Servive List</a>
+
+</div>

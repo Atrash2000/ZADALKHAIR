@@ -111,7 +111,7 @@ namespace ZADALKHAIR.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ServiceID,ServiceTitle,ServiceDiscription,ServiceStartingPrice,ServiceImage")] Service service)
+        public async Task<IActionResult> Edit(int id, [Bind("ServiceID,ServiceTitle,ServiceDiscription,features,ServiceStartingPrice,ServicePic,ServiceImage")] Service service)
         {
             if (id != service.ServiceID)
             {
@@ -122,6 +122,9 @@ namespace ZADALKHAIR.Controllers
             {
                 try
                 {
+                    //service.CreatedAt = DateTime.Now;
+                    string profilePic = await UploadFile(service.ServicePic);
+                    service.ServiceImage = profilePic;
                     _context.Update(service);
                     await _context.SaveChangesAsync();
                 }

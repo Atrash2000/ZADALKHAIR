@@ -19,15 +19,6 @@ namespace ZADALKHAIR.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public async Task<IActionResult> Dashboard()
-        {
-            TempData["EmployeesCount"] = _context.User.Count();
-
-            return View();
-        }
-
         [HttpGet]
         [Route("emptyData")]
         public PartialViewResult NoDataFound()

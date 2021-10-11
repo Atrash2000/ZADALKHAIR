@@ -116,7 +116,7 @@ namespace ZADALKHAIR.Controllers
                     new Claim(ClaimTypes.PrimarySid, user.UserID.ToString()),
                     new Claim(ClaimTypes.Role, user.UserRoleType)
                 }),
-                Expires = DateTime.UtcNow.AddHours(1),
+                Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenkey), SecurityAlgorithms.HmacSha256Signature)
             };
             return tokenhandler.CreateEncodedJwt(tokendesciptor);
@@ -127,7 +127,11 @@ namespace ZADALKHAIR.Controllers
         /*[Authorize]*/
         public IActionResult Create()
         {
-            return View();
+            var user = new User()
+            {
+                UserEmail = ""
+            };
+            return View(user);
         }
 
         // POST: Users/Create

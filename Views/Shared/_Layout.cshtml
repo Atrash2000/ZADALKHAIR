@@ -60,7 +60,7 @@
                         <a asp-action="AboutUs" asp-controller="Home" class="text-white">About Us</a>
                     </li>
                     <li class="mb-3">
-                        <a href="#" class="text-white">Our Services</a>
+                        <a  asp-action="ServiceView" asp-controller="Home"  class="text-white">Our Services</a>
                     </li>
                     <li class="mb-3">
                         <a asp-action="Create" asp-controller="Contacts" class="text-white">Contact Us</a>
@@ -74,7 +74,7 @@
                 <img src="~/images/logo1.jpeg" class="logo-img-1" alt="logo" id="logo">
 
                 <ul class="d-flex">
-                    <li class="text-white pt-4">TOLL FREE: 800 – KNOX (5669)</li>
+                    
                     <li class="pt-4 mx-4">
                         <div onclick="showSideBar()" class="hamburger">
                             <div class="top-bun"></div>
@@ -121,12 +121,12 @@
                                         </ul>
 
                                         <ul class="footer-social">
-                                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                            <li><a href="#"><i style="color: black !important" class="fab fa-instagram"></i></a></li>
                                             <li>
-                                                <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook"></i></a>
+                                                <a href="https://bit.ly/sai4ull"><i style="color: black !important"  class="fab fa-facebook"></i></a>
                                             </li>
-                                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                            <li> <a href="#"><i class="fab fa-youtube"></i></a></li>
+                                            <li><a href="#"><i style="color: black !important"  class="fab fa-linkedin-in"></i></a></li>
+                                            <li> <a href="#"><i style="color: black !important"  class="fab fa-youtube"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -138,12 +138,11 @@
                                     <h4>Navigation</h4>
                                     <ul>
                                         <li>
-                                            <a href="#" class="mr-5">Home</a>
-                                            <a href="#" class="ml-5">About</a>
+                                            <a  asp-action="Index" asp-controller="Home" >Home</a>
+                                            <a  asp-action="AboutUs" asp-controller="Home" >About</a>
                                         </li>
                                         <li class="my-4">
-                                            <a href="#" class="mr-5">Services</a>
-                                            <a href="#" class="ml-5">Blog</a>
+                                            <a  asp-action="ServiceView" asp-controller="Home" >Services</a>
                                         </li>
                                         <li><a asp-controller="Contacts" asp-action="Create">Contact</a></li>
                                     </ul>
@@ -178,7 +177,7 @@
                                             <input type="email" name="email" id="newsletter-form-email"
                                                    placeholder="Email Address" class="placeholder hide-on-focus"
                                                    onfocus="this.placeholder = ''"
-                                                   onblur="this.placeholder = ' Email Address '">
+                                                   onblur="this.placeholder = 'Email Address '">
                                             <div class="form-icon">
                                                 <button type="submit" name="submit" id="newsletter-submit"
                                                         class="email_icon newsletter-submit button-contactForm">

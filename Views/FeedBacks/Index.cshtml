@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
-
+<h2 class="text-white">Feedback</h2>
 @if (Model != null && Model.Count() > 0)
 {
-    <h1 class="text-white">Feedback</h1>
+
 
     <table class="table">
         <thead>
@@ -91,14 +91,30 @@
 }
 else
 {
-    <div class="empty-state"></div>
+    <div class="empty-state">
+
+    </div>
+
+    <!--<div class="empty-state__content">
+        <div class="empty-state__icon">
+            <img src="~/images/NoData.png" alt="">
+        </div>
+        <div class="empty-state__message">No records has been added yet.</div>-->
+    @*<div class="empty-state__help">
+            Add a new record by simpley clicking the button on top right side.
+        </div>*@
+    <!--</div>-->
+
+
 }
 
 @section Scripts {
     <script>
         $(function () {
             $(window).on("load", function () {
+
                 $(".empty-state").load("/Admin/emptyData");
+
             });
 
             $('button.details').on('click', function () {
