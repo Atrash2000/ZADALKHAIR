@@ -1,15 +1,12 @@
 ﻿@model IEnumerable<ZADALKHAIR.Models.Service>
 
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
-}
+@{ ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml"; }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h2 class="text-white ml-3">Service</h2>
+<a asp-action="Create" asp-controller="Services" class="btn btn-primary ml-3">Add New Service</a>
+@if (Model != null && Model.Count() > 0)
+{
 <table class="table">
     <thead>
         <tr>
@@ -26,8 +23,8 @@
                 @Html.DisplayNameFor(model => model.ServiceImage)
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.ServiceApproved)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.ServiceApproved)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.CreatedAt)
             </th>
@@ -35,30 +32,57 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ServiceTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ServiceDiscription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ServiceStartingPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ServiceImage)
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ServiceID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ServiceID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ServiceID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ServiceTitle)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ServiceDiscription)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ServiceStartingPrice)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ServiceImage)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.CreatedAt)
+    </td>
+    <td>
+        
+        <a asp-action="Details" class="btn btn-info" asp-route-id="@item.ServiceID">Details</a>
+    </td>
+</tr>}
     </tbody>
-</table>
+</table> }
+
+else
+{
+
+<div class="empty-state__content">
+    <div class="empty-state__icon">
+        <img src="~/images/NoData.png" alt="">
+    </div>
+    <div class="empty-state__message">No records has been added yet.</div>
+    @*<div class="empty-state__help">
+            Add a new record by simpley clicking the button on top right side.
+        </div>*@
+</div>}
+
+@section Scripts {
+    <script>
+        $(function () {
+            $(window).on("load", function () {
+                $(".empty-state").load("/Admin/emptyData");
+
+            });
+
+            $('button.details').on('click', function () {
+                $('.modal-content').load(`/Admin/Feedback/Details/injuction/${$(this).data('id')}`);
+            });
+        })
+    </script>
+}
