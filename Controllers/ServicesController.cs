@@ -44,6 +44,11 @@ namespace ZADALKHAIR.Controllers
             
             return View("_ServiceDetails",service);
         }
+
+        public IActionResult AdminDetails()
+        {
+            return View("Details");
+        }
    
         // GET: Services/Create
         public IActionResult Create()
