@@ -136,6 +136,7 @@ namespace ZADALKHAIR.Controllers
             {
                 try
                 {
+                    contact.SatutsUpdate = DateTime.Now;
                     contact.ContactSatuts = !contact.ContactSatuts;
                     _context.Update(contact);
                     await _context.SaveChangesAsync();

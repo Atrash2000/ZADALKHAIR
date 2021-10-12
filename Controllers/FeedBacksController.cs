@@ -24,7 +24,39 @@ namespace ZADALKHAIR.Controllers
         {
             return View(await _context.FeedBack.ToListAsync());
         }
+        public async Task<IActionResult> Update(int? id)
+        {
+            var contact = await _context.FeedBack.FindAsync(id);
+            if (id != contact.FeedBackID)
+            {
+                return NotFound();
+            }
 
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    contact.SatutsUpdate = DateTime.Now;
+                    contact.FeedBackSatuts = !contact.FeedBackSatuts;
+                    _context.Update(contact);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!FeedBackExists(contact.FeedBackID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            //return View(contact);
+            return View(nameof(Index));
+        }
         // GET: FeedBacks/Details/5
         [HttpGet]
         [Route("Admin/Feedback/Details/injuction/{id}")]
