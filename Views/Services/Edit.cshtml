@@ -1,14 +1,14 @@
 ﻿@model ZADALKHAIR.Models.Service
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
 <div class="content">
     <div class="container-fluid">
         <div>
-            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <form class="row" asp-action="Edit" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="ServiceID" />
                 <div class="col-md-8">
@@ -26,17 +26,8 @@
                                         <span asp-validation-for="ServiceTitle" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label asp-for="features" class="bmd-label-floating"></label>
-                                        <input asp-for="features" class="form-control">
-                                        <span asp-validation-for="features" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="form-row">
-                                <div class="col-sm-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label asp-for="ServiceStartingPrice" class="bmd-label-floating"></label>
                                         <input asp-for="ServiceStartingPrice" class="form-control">
@@ -48,7 +39,18 @@
                             <div class="form-row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <textarea asp-for="ServiceDiscription" rows="5" placeholder="Discription" class="form-control"></textarea>
+                                        <label asp-for="features" class="bmd-label-floating"></label>
+                                        <textarea rows="5" asp-for="features" class="form-control"></textarea>
+                                        <span asp-validation-for="features" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label asp-for="ServiceDiscription"></label>
+                                        <textarea asp-for="ServiceDiscription" rows="8" placeholder="Discription" class="form-control"></textarea>
                                         <span asp-validation-for="ServiceDiscription" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -81,11 +83,12 @@
                 <div class="col-md-4">
                     <div class="card card-profile">
 
-                        <div class="card-avatar ">
+                        <div class="card-avatar">
                             <img style="width: 100px; height: 100px" src="~/images/profilePic/@Model.ServiceImage" />
                         </div>
-
-                        <input type="file" style="color: white !important" name="ServicePic" asp-for="ServicePic" />
+                        <div class="my-4 ml-5">
+                            <input type="file" class="choose" name="ServicePic" asp-for="ServicePic" />
+                        </div>
                     </div>
                 </div>
 

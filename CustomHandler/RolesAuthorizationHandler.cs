@@ -36,7 +36,6 @@ namespace ZADALKHAIR.CustomHandler
             else
             {
                 var claims = context.User.Claims;
-                /*var userName = claims.FirstOrDefault(c => c.Type == "UserEmail").Value;*/
                 var roles = requirement.AllowedRoles;
 
                 validRole = _context.User.Where(p => roles.Contains(p.UserRoleType)).Any();

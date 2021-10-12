@@ -72,9 +72,7 @@
                         @item.Sex
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.FeedBackID">Edit</a> |
-                        <button type="button" data-id="@item.FeedBackID" data-toggle="modal" class="btn details" data-target="#exampleModalCenter">Details</button> |
-                        <a asp-action="Delete" asp-route-id="@item.FeedBackID">Delete</a>
+                        <button type="button" data-id="@item.FeedBackID" data-toggle="modal" class="btn details btn-primary" data-target="#exampleModalCenter">Details</button>
                     </td>
                 </tr>
             }
