@@ -28,6 +28,7 @@ namespace ZADALKHAIR.Controllers
         public async Task<IActionResult> Index()
         {
             ViewData["feedback"] = await _context.FeedBack.ToListAsync();
+            ViewBag.feedbackCount = _context.FeedBack.Count();
             return View();
         }
 

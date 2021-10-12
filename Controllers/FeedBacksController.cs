@@ -45,12 +45,6 @@ namespace ZADALKHAIR.Controllers
             return PartialView("_FeedbackDetails", feedBack);
         }
 
-        // GET: FeedBacks/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
         // POST: FeedBacks/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -65,7 +59,7 @@ namespace ZADALKHAIR.Controllers
                 feedBack.FeedBackSatuts = false;
                 _context.Add(feedBack);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(feedBack);
         }

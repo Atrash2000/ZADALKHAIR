@@ -31,6 +31,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 
 
+    <link rel="stylesheet" href="~/lib/rateYo/jquery.rateyo.css" />
+
+
     <link rel="stylesheet" href="~/css/AboutUs.css" />
     <link rel="stylesheet" href="~/css/ContactUs.css" />
     <link rel="stylesheet" href="~/css/Home.css" />
@@ -63,10 +66,13 @@
                         <a asp-action="AboutUs" asp-controller="Home" class="text-white">About Us</a>
                     </li>
                     <li class="mb-3">
-                        <a  asp-action="ServiceView" asp-controller="Home"  class="text-white">Our Services</a>
+                        <a asp-action="ServiceView" asp-controller="Home" class="text-white">Our Services</a>
                     </li>
                     <li class="mb-3">
                         <a asp-action="Create" asp-controller="Contacts" class="text-white">Contact Us</a>
+                    </li>
+                    <li class="mb-3">
+                        <a asp-action="Login" asp-controller="Users" class="text-white">Login</a>
                     </li>
                 </ul>
             </nav>
@@ -77,7 +83,7 @@
                 <img src="~/images/logo1.jpeg" class="logo-img-1" alt="logo" id="logo">
 
                 <ul class="d-flex">
-                    
+
                     <li class="pt-4 mx-4">
                         <div onclick="showSideBar()" class="hamburger">
                             <div class="top-bun"></div>
@@ -126,10 +132,10 @@
                                         <ul class="footer-social">
                                             <li><a href="#"><i style="color: black !important" class="fab fa-instagram"></i></a></li>
                                             <li>
-                                                <a href="https://bit.ly/sai4ull"><i style="color: black !important"  class="fab fa-facebook"></i></a>
+                                                <a href="https://bit.ly/sai4ull"><i style="color: black !important" class="fab fa-facebook"></i></a>
                                             </li>
-                                            <li><a href="#"><i style="color: black !important"  class="fab fa-linkedin-in"></i></a></li>
-                                            <li> <a href="#"><i style="color: black !important"  class="fab fa-youtube"></i></a></li>
+                                            <li><a href="#"><i style="color: black !important" class="fab fa-linkedin-in"></i></a></li>
+                                            <li> <a href="#"><i style="color: black !important" class="fab fa-youtube"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -141,32 +147,19 @@
                                     <h4>Navigation</h4>
                                     <ul>
                                         <li>
-                                            <a  asp-action="Index" asp-controller="Home" >Home</a>
-                                            <a  asp-action="AboutUs" asp-controller="Home" >About</a>
+                                            <a asp-action="Index" asp-controller="Home">Home</a>
+                                            <a asp-action="AboutUs" asp-controller="Home" class="ml-5">About</a>
                                         </li>
                                         <li class="my-4">
-                                            <a  asp-action="ServiceView" asp-controller="Home" >Services</a>
+                                            <a asp-action="ServiceView" asp-controller="Home">Services</a>
                                         </li>
                                         <li><a asp-controller="Contacts" asp-action="Create">Contact</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        @*<div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                                <div class="single-footer-caption mb-50">
-                                    <div class="footer-tittle">
-                                        <h4>Services</h4>
-                                        <ul>
-                                            <li><a href="#">Drone Mapping</a></li>
-                                            <li><a href="#"> Real State</a></li>
-                                            <li><a href="#">Commercial</a></li>
-                                            <li><a href="#">Construction</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>*@
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-8">
-                            <div class="single-footer-caption mb-50">
+                            @*<div class="single-footer-caption mb-50">
                                 <div class="footer-tittle mb-50">
                                     <h4>Subscribe newsletter</h4>
                                     <p>Subscribe our newsletter to get updates about our services and offers.</p>
@@ -191,7 +184,7 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 </div>
@@ -216,7 +209,11 @@
 
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/rateYo/jquery.rateyo.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
