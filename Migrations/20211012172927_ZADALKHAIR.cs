@@ -81,7 +81,7 @@ namespace ZADALKHAIR.Migrations
                     USerCountryCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserRoleType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserCreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserPassword = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     UserProfilePic = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
