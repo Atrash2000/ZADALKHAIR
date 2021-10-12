@@ -59,6 +59,29 @@ namespace ZADALKHAIR.Controllers
         }
 
         [HttpGet]
+        [Route("Registration")]
+        public IActionResult Registration()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Registration([Bind("UserEmail,UserFirstName,UserLastName,UserPhoneNumber,USerCountryCode,UserRoleType,UserPassword,ProfilePic,UserProfilePic,UserCreateAt")] User user)
+        {
+            user.UserCreateAt = DateTime.Now;
+            string profilePic = UploadFile(user.ProfilePic);
+            user.UserProfilePic = profilePic;
+            if (ModelState.IsValid)
+            {
+                user.UserPassword = ComputeStringToSha256Hash(user.UserPassword);
+                _context.Add(user);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(user);
+        }
+
+        [HttpGet]
         [Route("Login")]
 
         public IActionResult Login(string? ReturnUrl)

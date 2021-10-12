@@ -294,9 +294,8 @@
         <p class="result-message centered">Thank you for your message</p>
     </div>
 
-    @if (ViewData["feedback"] != null)
+    @if ((int)ViewBag.feedbackCount > 0)
     {
-
         <h2 class="text-center text-break mt-5" style="z-index: 1500">What clients are saying</h2>
 
         <div class="feedback-area py-5">
@@ -332,6 +331,8 @@
                         </div>
                     }
                 </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination"></div>
             </div>
         </div>
@@ -355,9 +356,12 @@
         })
 
         var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 4,
+            slidesPerView: 3,
             spaceBetween: 75,
-            loop: "@ViewBag.feedbackCount" > 3 ? true : false,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
             pagination: {
                 el: ".swiper-pagination",
             },

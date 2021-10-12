@@ -1,0 +1,74 @@
+﻿@model ZADALKHAIR.Models.User
+
+@{
+    ViewData["Title"] = "Registration";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<h1>Registration</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Registration">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserEmail" class="control-label"></label>
+                <input asp-for="UserEmail" class="form-control" />
+                <span asp-validation-for="UserEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserFirstName" class="control-label"></label>
+                <input asp-for="UserFirstName" class="form-control" />
+                <span asp-validation-for="UserFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserLastName" class="control-label"></label>
+                <input asp-for="UserLastName" class="form-control" />
+                <span asp-validation-for="UserLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPhoneNumber" class="control-label"></label>
+                <input asp-for="UserPhoneNumber" class="form-control" />
+                <span asp-validation-for="UserPhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="USerCountryCode" class="control-label"></label>
+                <input asp-for="USerCountryCode" class="form-control" />
+                <span asp-validation-for="USerCountryCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserRoleType" class="control-label"></label>
+                <input asp-for="UserRoleType" class="form-control" />
+                <span asp-validation-for="UserRoleType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserCreateAt" class="control-label"></label>
+                <input asp-for="UserCreateAt" class="form-control" />
+                <span asp-validation-for="UserCreateAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPassword" class="control-label"></label>
+                <input asp-for="UserPassword" class="form-control" />
+                <span asp-validation-for="UserPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserProfilePic" class="control-label"></label>
+                <input asp-for="UserProfilePic" class="form-control" />
+                <span asp-validation-for="UserProfilePic" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
