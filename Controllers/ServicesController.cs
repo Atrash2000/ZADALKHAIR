@@ -45,9 +45,21 @@ namespace ZADALKHAIR.Controllers
             return View("_ServiceDetails",service);
         }
 
-        public IActionResult AdminDetails()
+        public async Task<IActionResult> AdminDetails(int? id)
         {
-            return View("Details");
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var service = await _context.Service
+                .FirstOrDefaultAsync(m => m.ServiceID == id);
+            if (service == null)
+            {
+                return NotFound();
+            }
+
+            return View("Details", service);
         }
    
         // GET: Services/Create

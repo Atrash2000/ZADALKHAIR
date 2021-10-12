@@ -52,6 +52,6 @@
     <form method="post" asp-action="Delete" >
         <input type="hidden" asp-for="ServiceID" />
         <input type="submit" asp-route-id="@Model.ServiceID" value="Sure, I want to Delete it" class="btn btn-danger"/>|
-        <a asp-action="Details" asp-route-id="@Model.ServiceID">No Don't Delete'</a>
+        <a asp-action="AdminDetails" asp-route-id="@Model.ServiceID">No Don't Delete</a>
     </form>
 </div>

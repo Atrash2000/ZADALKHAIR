@@ -13,18 +13,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.ServiceTitle)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.ServiceDiscription)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.ServiceStartingPrice)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ServiceImage)
             </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.ServiceApproved)
-                </th>*@
+            
             <th>
                 @Html.DisplayNameFor(model => model.CreatedAt)
             </th>
@@ -38,18 +36,18 @@
     <td>
         @Html.DisplayFor(modelItem => item.ServiceTitle)
     </td>
-    <td>
+    @*<td>
         @Html.DisplayFor(modelItem => item.ServiceDiscription)
+    </td>*@
+    <td>
+        @item.ServiceStartingPrice.ToString("c")
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.ServiceStartingPrice)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ServiceImage)
+        @item.ServiceImage
     </td>
 
     <td>
-        @Html.DisplayFor(modelItem => item.CreatedAt)
+        @item.CreatedAt
     </td>
     <td>
 
