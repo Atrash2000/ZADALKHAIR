@@ -117,7 +117,7 @@ namespace ZADALKHAIR.Controllers
                     new Claim(ClaimTypes.Role, user.UserRoleType)
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenkey), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenkey), SecurityAlgorithms.HmacSha256Signature),
             };
             return tokenhandler.CreateEncodedJwt(tokendesciptor);
         }
