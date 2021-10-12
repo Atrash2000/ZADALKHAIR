@@ -16750,6 +16750,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   padding: 12px 8px;
   vertical-align: middle;
   border-color: #ddd;
+  color: white !important;
 }
 
 .table thead tr th {

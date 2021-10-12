@@ -40,7 +40,7 @@ namespace ZADALKHAIR.Controllers
         // GET: Users/Details/5
         [HttpGet]
         [Route("Admin/User/Details/injuction/{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Employee")]
         public async Task<PartialViewResult> Details(int? id)
         {
             if (id == null)
@@ -193,7 +193,7 @@ namespace ZADALKHAIR.Controllers
         // GET: Users/Edit/5
         [HttpGet]
         [Authorize]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Employee")]
         [Route("Admin/profile/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {

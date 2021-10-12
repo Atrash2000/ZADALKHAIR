@@ -16,6 +16,7 @@
     <link href="~/Admin/assets/demo/demo.css" rel="stylesheet" />
     <link href="~/css/Users.css" rel="stylesheet" />
     <link href="~/css/NoData.css" rel="stylesheet">
+    <link href="~/css/Service.css" rel="stylesheet"/>
 </head>
 <body class="dark-edition">
     <div class="spinner">
@@ -150,16 +151,6 @@
             const userId = user.primarysid;
             window.location.href = window.location.href.replace(window.location.href, `/Admin/profile/${userId}`);
         }
-
-        $(document).ready(function () {
-
-            $('ul.nav > li')
-                .click(function (e) {
-                    $('ul.nav > li')
-                        .removeClass('active');
-                    $(this).addClass('active');
-                });
-        });
     </script>
 </body>
 </html>
