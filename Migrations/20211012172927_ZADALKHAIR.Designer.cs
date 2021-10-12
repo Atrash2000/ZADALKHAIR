@@ -10,7 +10,7 @@ using ZADALKHAIR.Data;
 namespace ZADALKHAIR.Migrations
 {
     [DbContext(typeof(ZADALKHAIRContext))]
-    [Migration("20211009214303_ZADALKHAIR")]
+    [Migration("20211012172927_ZADALKHAIR")]
     partial class ZADALKHAIR
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -184,7 +184,8 @@ namespace ZADALKHAIR.Migrations
 
                     b.Property<string>("UserPassword")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("UserPhoneNumber")
                         .IsRequired()
