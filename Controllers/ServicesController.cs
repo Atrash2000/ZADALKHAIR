@@ -25,23 +25,24 @@ namespace ZADALKHAIR.Controllers
         {
             return View(await _context.Service.ToListAsync());
         }
-
+        [HttpGet]
+      
         // GET: Services/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return PageNotFound();
             }
 
             var service = await _context.Service
                 .FirstOrDefaultAsync(m => m.ServiceID == id);
             if (service == null)
             {
-                return NotFound();
+                return PageNotFound();
             }
-
-            return View(service);
+            
+            return View("_ServiceDetails",service);
         }
    
         // GET: Services/Create
@@ -54,7 +55,6 @@ namespace ZADALKHAIR.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-       
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ServiceID,ServiceTitle,ServiceDiscription,features,ServiceStartingPrice,ServicePic")] Service service)
         {
@@ -176,6 +176,11 @@ namespace ZADALKHAIR.Controllers
         private bool ServiceExists(int id)
         {
             return _context.Service.Any(e => e.ServiceID == id);
+        }
+        [HttpGet]
+        public PartialViewResult PageNotFound()
+        {
+            return PartialView("_PageNotFound");
         }
     }
 }

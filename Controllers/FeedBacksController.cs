@@ -56,10 +56,13 @@ namespace ZADALKHAIR.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FeedBackID,Name,Email,PhoneNumber,CounrtyCode,Massege,FeedBackSatuts,CreatedAt,SatutsUpdate,Rate,Image")] FeedBack feedBack)
+        public async Task<IActionResult> Create([Bind("FeedBackID,Name,Email,PhoneNumber,CounrtyCode,Massege,Rate,Sex")] FeedBack feedBack)
         {
             if (ModelState.IsValid)
             {
+
+                feedBack.CreatedAt = DateTime.Now;
+                feedBack.FeedBackSatuts = false;
                 _context.Add(feedBack);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

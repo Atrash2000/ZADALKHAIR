@@ -41,7 +41,7 @@
                     <div class="side">
                         <h1>Feedback</h1>
                         <p>
-                            <textarea placeholder="Your message"></textarea>
+                            <textarea asp-for="Massege" placeholder="Your message"></textarea>
                         </p>
                     </div>
                     <div class="side">
@@ -52,10 +52,10 @@
                             <input type="email" asp-for="Email" placeholder="Your email">
                         </p>
                         <p>
-                            <input type="radio" name="gender" value="Male" />
-                            <label>Male</label>
-                            <input type="radio" name="gender" value="Female" />
-                            <label>Female</label>
+                            <input type="radio" asp-for="Sex" name="Sex" value="Male" />
+                            <label asp-for="Sex">Male</label>
+                            <input type="radio" asp-for="Sex" name="Sex" value="Female" />
+                            <label asp-for="Sex">Female</label>
                         </p>
                         <p>
                             <input type="text" asp-for="PhoneNumber" placeholder="Phone Number">

@@ -3,8 +3,8 @@
     ViewData["Title"] = "Services";
 }
 @*<div class="w-100 main-header">
-    <h2 class="position-relative mx-auto item-center font-weight-bold">Our Services</h2>
-</div>*@
+        <h2 class="position-relative mx-auto item-center font-weight-bold">Our Services</h2>
+    </div>*@
 
 <div class="w-100 main-header">
     <h2 class="position-relative mx-auto item-center font-weight-bold">Our Services</h2>
@@ -14,50 +14,31 @@
     <div class="row">
         @foreach (var service in Model)
         {
-<div class="col-lg-4 col-md-6 col-sm-12">
-    <figure class="image-block">
-        <img src="~/images/servicePic/@service.ServiceImage" />
-        <figcaption style="position: absolute">
-            <h1>@service.ServiceTitle</h1>
-            <h4>More Info</h4>
-            <div class="row justify-content-between">
-                <h5>@service.features</h5>
-                <span class="h4">@service.ServiceStartingPrice</span>
-            </div>
-            <p class="discription">
-                @service.ServiceDiscription
-            </p>
-            <button data-id="@service.ServiceID" data-toggle="modal" data-target="#exampleModalCenter">
-                Read More
-            </button>
-        </figcaption>
-    </figure>
-</div>}
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <figure class="image-block">
+                    <img src="~/images/servicePic/@service.ServiceImage" />
+                    <figcaption style="position: absolute">
+                        <h1>@service.ServiceTitle</h1>
+                        <h4>More Info</h4>
+                        <div class="row justify-content-between">
+                            <h5>@service.features</h5>
+                            <span class="h4">@service.ServiceStartingPrice</span>
+                        </div>
+                        <p class="discription" >
+                            @service.ServiceDiscription
+                        </p>
+                        <a style="background-color: #40e0d0; " asp-action="Details" asp-controller="Services" asp-route-id="@service.ServiceID"class="btn details">
+                            Read More
+                        </a>
+                    </figcaption>
+                </figure>
+            </div>}
     </div>
 </section>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLongTitle" style="color: black !important;"></h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" style="color: black !important;">
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 @section Scripts {
-    <script>let noOfChar = 275;
+    <script>
+        let noOfChar = 150;
         let contents = document.querySelectorAll(".discription");
         contents.forEach(content => {
             if (content.textContent.length < noOfChar) {
@@ -71,8 +52,9 @@
 
                 $(content.parentElement.children[4]).on("click", function () {
                     let moreText = content.textContent.slice(noOfChar);
-
                 })
             }
-        })</script>
+        })
+
+    </script>
 }
