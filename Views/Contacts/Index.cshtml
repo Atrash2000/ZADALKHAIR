@@ -72,11 +72,11 @@
                         <button type="button" data-id="@item.ContactID" data-toggle="modal" class="btn btn-primary details" data-target="#exampleModalCenter">Details</button>
                         @if (!item.ContactSatuts)
                         {
-                            <a class="btn btn-success">Accept</a>
+                            <a asp-action="Update" asp-route-id="@item.ContactID"  class="btn btn-success">Accept</a>
                         }
                         else
                         {
-                            <a class="btn btn-danger">Make As Read</a>
+                            <a asp-action="Update" asp-route-id="@item.ContactID" class="btn btn-danger">Make As Read</a>
                         }
                     </td>
                 </tr>

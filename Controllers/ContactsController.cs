@@ -123,6 +123,39 @@ namespace ZADALKHAIR.Controllers
             }
             return View(contact);
         }
+        
+        public async Task<IActionResult> Update(int? id)
+        {
+            var contact = await _context.Contact.FindAsync(id);
+            if (id != contact.ContactID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    contact.ContactSatuts = !contact.ContactSatuts;
+                    _context.Update(contact);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ContactExists(contact.ContactID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            //return View(contact);
+            return View(nameof(Index));
+        }
         [Authorize(Roles = "Admin")]
         // GET: Contacts/Delete/5
         public async Task<IActionResult> Delete(int? id)

@@ -55,7 +55,7 @@ else
             $(window).on("load", function () {
                 $(".empty-state").load("/Admin/emptyData");
             });
-
+            
             $('button.details').on('click', function () {
                 $('.modal-content').load(`/Admin/User/Details/injuction/${$(this).data('id')}`);
             });
