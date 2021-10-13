@@ -4,7 +4,7 @@
 }
 
 .login-box {
-    margin-top: 75px;
+    margin-top: 30px;
     height: auto;
     background: #1A2226;
     text-align: center;
@@ -35,8 +35,8 @@
     text-align: left;
 }
 
-input[type=text] {
-    background-color: #1A2226;
+input[type=text]{
+    background-color: #1A2226 !important;
     border: none;
     border-bottom: 2px solid #0DB8DE;
     border-top: 0px;
@@ -44,25 +44,25 @@ input[type=text] {
     font-weight: bold;
     outline: 0;
     margin-bottom: 20px;
-    padding-left: 0px;
+    padding-left: 0.5rem;
     color: #ECF0F5;
 }
 
 input[type=password] {
-    background-color: #1A2226;
-    border: none;
-    border-bottom: 2px solid #0DB8DE;
-    border-top: 0px;
-    border-radius: 0px;
-    font-weight: bold;
-    outline: 0;
-    padding-left: 0px;
-    margin-bottom: 20px;
-    color: #ECF0F5;
+    background-color: #1A2226 !important;
+    border: none !important;
+    border-bottom: 2px solid #0DB8DE !important;
+    border-top: 0px !important;
+    border-radius: 0px !important;
+    font-weight: bold !important;
+    outline: 0 !important;
+    padding-left: 0.5rem !important;
+    margin-bottom: 20px !important;
+    color: #ECF0F5 !important;
 }
 
 .form-group {
-    margin-bottom: 40px;
+    margin-bottom: 25px;
     outline: 0px;
 }
 
@@ -124,4 +124,22 @@ label {
 
 .loginbttm {
     padding: 0px;
+}
+
+/* Upload Btn */
+.choose::-webkit-file-upload-button {
+    color: white;
+    display: inline-block;
+    background: #1CB6E0;
+    border: none;
+    padding: 7px 15px;
+    font-weight: 700;
+    border-radius: 3px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 10pt;
+}
+
+.choose {
+    color: white;
 }

@@ -66,6 +66,7 @@ namespace ZADALKHAIR.Controllers
         }
 
         [HttpPost]
+        [Route("Registration")]
         public async Task<IActionResult> Registration([Bind("UserEmail,UserFirstName,UserLastName,UserPhoneNumber,USerCountryCode,UserRoleType,UserPassword,ProfilePic,UserProfilePic,UserCreateAt")] User user)
         {
             user.UserCreateAt = DateTime.Now;
@@ -76,7 +77,7 @@ namespace ZADALKHAIR.Controllers
                 user.UserPassword = ComputeStringToSha256Hash(user.UserPassword);
                 _context.Add(user);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Login));
             }
             return View(user);
         }
