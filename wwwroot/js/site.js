@@ -69,7 +69,7 @@ function closeSidebar() {
 window.onload = () => {
     setTimeout(() => {
         document.querySelector(".spinner").classList.add("d-none");
-    }, 2000)
+    }, 1500)
 }
 
 /* Decode Token */

@@ -30,7 +30,11 @@ namespace ZADALKHAIR.Controllers
             _context = context;
             this.webhostenvironment = webhostenvironment;
         }
+
+        [HttpGet]
         [Route("Admin/ViewEmployee")]
+        [Authorize]
+        [Authorize(Roles = "Admin, Employee")]
         // GET: Users
         public async Task<IActionResult> Index()
         {
@@ -65,7 +69,7 @@ namespace ZADALKHAIR.Controllers
             return View();
         }
 
-        [HttpPost]
+        /*[HttpPost]
         [Route("Registration")]
         public async Task<IActionResult> Registration([Bind("UserEmail,UserFirstName,UserLastName,UserPhoneNumber,USerCountryCode,UserRoleType,UserPassword,ProfilePic,UserProfilePic,UserCreateAt")] User user)
         {
@@ -80,11 +84,10 @@ namespace ZADALKHAIR.Controllers
                 return RedirectToAction(nameof(Login));
             }
             return View(user);
-        }
+        }*/
 
         [HttpGet]
         [Route("Login")]
-
         public IActionResult Login(string? ReturnUrl)
         {
             Response.Cookies.Delete("UserLoginCookie", new CookieOptions()
@@ -97,7 +100,14 @@ namespace ZADALKHAIR.Controllers
                 return RedirectToAction(nameof(Login));
             }
 
-            return View();
+            if (_context.User.Count() > 0)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction(nameof(Registration));
+            }
         }
 
         [HttpPost]
@@ -148,7 +158,8 @@ namespace ZADALKHAIR.Controllers
 
         [Route("Admin/AddEmployee")]
         [HttpGet]
-        /*[Authorize]*/
+        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             var user = new User()
@@ -240,15 +251,13 @@ namespace ZADALKHAIR.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Admin/profile/{id}")]
-        public async Task<IActionResult> Edit(int id, [Bind("UserID,UserEmail,ProfilePic,UserFirstName,UserLastName,UserPhoneNumber,USerCountryCode,UserRoleType,UserPassword")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("UserID,UserEmail,ProfilePic,UserFirstName,UserLastName,UserPhoneNumber,USerCountryCode,UserRoleType,UserPassword,UserProfilePic")] User user)
         {
             if (id != user.UserID)
             {
                 return NotFound();
             }
             user.UserCreateAt = DateTime.Now;
-            string profilePic = UploadFile(user.ProfilePic);
-            user.UserProfilePic = profilePic;
             if (ModelState.IsValid)
             {
                 try

@@ -18,19 +18,22 @@
 
             <div class="col-lg-12 login-form">
                 <div class="col-lg-12 login-form">
-                    <form asp-action="Registration" asp-controller="Users" class="registration-form" method="post">
+                    <form asp-action="Create" asp-controller="Users" class="registration-form" method="post" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="UserRoleType" value="Admin" />
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="UserFirstName" class="form-control-label"></label>
                                     <input asp-for="UserFirstName" type="text" class="form-control">
+                                    <span asp-validation-for="UserFirstName" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="UserLastName" class="form-control-label"></label>
                                     <input asp-for="UserLastName" type="text" class="form-control">
+                                    <span asp-validation-for="UserLastName" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -275,16 +278,19 @@
                         <div class="form-group">
                             <label asp-for="UserEmail" class="form-control-label"></label>
                             <input asp-for="UserEmail" class="form-control">
+                            <span asp-validation-for="UserEmail" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
                             <label asp-for="UserPassword" class="form-control-label"></label>
                             <input asp-for="UserPassword" type="password" class="form-control" />
+                            <span asp-validation-for="UserPassword" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
                             <div class="my-4">
-                                <input type="file" class="choose" name="ProfilePic" asp-for="ProfilePic" />
+                                <input type="file" class="choose" id="mediaFile" name="ProfilePic" asp-for="ProfilePic" />
+                                <span asp-validation-for="ProfilePic" class="text-danger d-block mt-3" id="mediaFileError"></span>
                             </div>
                         </div>
 
@@ -304,4 +310,13 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $("form").on('submit', () => {
+            if ($("#mediaFile").val() == "") {
+                $("#mediaFileError").text("The Profile Picture field is required.");
+                return;
+            }
+        });
+    </script>
 }

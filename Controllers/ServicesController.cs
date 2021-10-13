@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,12 +22,14 @@ namespace ZADALKHAIR.Controllers
             this.webhostenvironment = webhostenvironment;
         }
         // GET: Services
+        [Authorize]
+        [Authorize(Roles = "Admin, Employee")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Service.ToListAsync());
         }
         [HttpGet]
-      
+
         // GET: Services/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,6 +48,8 @@ namespace ZADALKHAIR.Controllers
             return View("_ServiceDetails",service);
         }
 
+        [Authorize]
+        [Authorize(Roles = "Admin, Employee")]
         public async Task<IActionResult> AdminDetails(int? id)
         {
             if (id == null)
@@ -61,8 +66,10 @@ namespace ZADALKHAIR.Controllers
 
             return View("Details", service);
         }
-   
+
         // GET: Services/Create
+        [Authorize]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult Create()
         {
             return View();
@@ -87,9 +94,11 @@ namespace ZADALKHAIR.Controllers
             return View(service);
         }
 
-       
+
 
         // GET: Services/Edit/5
+        [Authorize]
+        [Authorize(Roles = "Admin, Employee")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)

@@ -54,9 +54,9 @@ namespace ZADALKHAIR.Models
         [MaxLength(150)]
         public string UserPassword { get; set; }
 
+        [StringLength(maximumLength: 3000)]
         public string UserProfilePic { get; set; }
 
-        [Required]
         [Display(Name = "Profile Picture")]
         [NotMapped]
         public IFormFile ProfilePic { get; set; }

@@ -21,6 +21,7 @@ namespace ZADALKHAIR.Controllers
             _context = context;
         }
         [Route("All-Contacts")]
+        [Authorize]
         [Authorize(Roles = "Admin")]
         // GET: Contacts
         public async Task<IActionResult> Index()
@@ -31,6 +32,8 @@ namespace ZADALKHAIR.Controllers
         // GET: Contacts/Details/5
         [HttpGet]
         [Route("Admin/Contact/Details/injuction/{id}")]
+        [Authorize]
+        [Authorize(Roles = "Admin, Employee")]
         public async Task<PartialViewResult> Details(int? id)
         {
             if (id == null)

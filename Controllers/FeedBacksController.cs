@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,9 @@ namespace ZADALKHAIR.Controllers
         }
 
         // GET: FeedBacks
+        [HttpGet]
+        [Authorize]
+        [Authorize(Roles = "Admin, Employee")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.FeedBack.ToListAsync());
@@ -60,6 +64,8 @@ namespace ZADALKHAIR.Controllers
         // GET: FeedBacks/Details/5
         [HttpGet]
         [Route("Admin/Feedback/Details/injuction/{id}")]
+        [Authorize]
+        [Authorize(Roles = "Admin, Employee")]
         public async Task<PartialViewResult> Details(int? id)
         {
             if (id == null)

@@ -8,7 +8,7 @@
 <div class="content">
     <div class="container-fluid">
         <div>
-            <form asp-action="Create" class="row" method="post" enctype="multipart/form-data">
+            <form class="row" asp-action="Create" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="col-md-8">
                     <div class="card">
@@ -333,7 +333,7 @@
                                 </div>
                             </div>
                             <input type="file" id="mediaFile" asp-for="ProfilePic" />
-                            <span asp-validation-for="ProfilePic" class="text-danger"></span>
+                            <span asp-validation-for="ProfilePic" class="text-danger" id="mediaFileError"></span>
                         </div>
                     </div>
                 </div>
@@ -347,6 +347,14 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
+
+        $("form").on('submit', () => {
+            if ($("#mediaFile").val() == "") {
+                $("#mediaFileError").text("The Profile Picture field is required.");
+                return;
+            }
+        });
+
         // ----- On render -----
         $(function () {
 
