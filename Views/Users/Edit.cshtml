@@ -7,7 +7,7 @@
 
 <div class="content">
     <div class="container-fluid">
-        <div class="row">
+        <div>
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header card-header-primary">
@@ -15,7 +15,8 @@
                         <p class="card-category">Complete your profile</p>
                     </div>
                     <div class="card-body">
-                        <form asp-action="Edit" method="post">
+                        <form asp-action="Edit" asp-controller="Users" asp-route-id="@Model.UserID" enctype="multipart/form-data" method="post">
+
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <input type="hidden" asp-for="UserID" />
                             <input type="hidden" asp-for="UserPassword" />
@@ -284,21 +285,23 @@
                             </div>
                             <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
                             <div class="clearfix"></div>
+                            <div class="col-md-4">
+                                <div class="card card-profile">
+                                    <div class="card-avatar">
+                                        <img name="UserProfilePic" asp-append-version="true" class="img" src="~/images/profilePic/@Model.UserProfilePic" />
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">@Model.UserFirstName @Model.UserLastName</h4>
+                                        <h5 class="card-description">
+                                            @Model.UserRoleType
+                                        </h5>
+                                    </div>
+                                    <div class="my-4 ml-5">
+                                        <input type="file" class="choose" name="ProfilePic" asp-for="ProfilePic" />
+                                    </div>
+                                </div>
+                            </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card card-profile">
-                    <div class="card-avatar">
-                        <img class="img" src="~/images/profilePic/@Model.UserProfilePic" />
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">@Model.UserFirstName @Model.UserLastName</h4>
-                        <h5 class="card-description">
-                            @Model.UserRoleType
-                        </h5>
                     </div>
                 </div>
             </div>

@@ -238,17 +238,21 @@ namespace ZADALKHAIR.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserID,UserEmail,UserFirstName,UserLastName,UserPhoneNumber,USerCountryCode,UserRoleType,UserPassword")] User user)
+        [Route("Admin/profile/{id}")]
+        public async Task<IActionResult> Edit(int id, [Bind("UserID,UserEmail,ProfilePic,UserFirstName,UserLastName,UserPhoneNumber,USerCountryCode,UserRoleType,UserPassword")] User user)
         {
             if (id != user.UserID)
             {
                 return NotFound();
             }
-
+            user.UserCreateAt = DateTime.Now;
+            string profilePic = UploadFile(user.ProfilePic);
+            user.UserProfilePic = profilePic;
             if (ModelState.IsValid)
             {
                 try
                 {
+                    
                     user.UserPassword = ComputeStringToSha256Hash(user.UserPassword);
                     _context.Update(user);
                     await _context.SaveChangesAsync();
