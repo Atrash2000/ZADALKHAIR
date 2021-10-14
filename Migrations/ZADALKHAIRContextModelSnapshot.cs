@@ -190,7 +190,8 @@ namespace ZADALKHAIR.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserProfilePic")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(3000)
+                        .HasColumnType("nvarchar(3000)");
 
                     b.Property<string>("UserRoleType")
                         .IsRequired()

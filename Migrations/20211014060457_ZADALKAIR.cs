@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ZADALKHAIR.Migrations
 {
-    public partial class ZADALKHAIR : Migration
+    public partial class ZADALKAIR : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -82,7 +82,7 @@ namespace ZADALKHAIR.Migrations
                     UserRoleType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserCreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserPassword = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    UserProfilePic = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserProfilePic = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: true)
                 },
                 constraints: table =>
                 {
